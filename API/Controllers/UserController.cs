@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Models;
@@ -14,74 +9,37 @@ namespace API.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserContext _context;
+        public UserController(UserContext context) => _context = context;
 
-        public UserController(UserContext context)
-        {
-            _context = context;
-        }
-
-        // GET: api/User
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserResponse>>> GetUsers()
+        public ActionResult<IEnumerable<UserResponse>> GetUsers()
         {
-            var userList = await _context.Users
+            return _context.Users
                 .Include(user => user.Locations)
-                .ToListAsync();
-
-            return userList.Select(user => new UserResponse(user)).ToList();
+                .Select(user => new UserResponse(user))
+                .ToList();
         }
 
-        // GET: api/User/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        [HttpGet("{userHash}")]
+        public ActionResult<UserResponse> GetUser(string userHash)
         {
-            if (_context.Users == null)
-            {
-                return NotFound();
-            }
-            var user = await _context.Users.FindAsync(id);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return user;
+            var userFound = _context.UserExists(userHash, out var user);
+            if (!userFound) return NotFound();
+            return new UserResponse(user!);
         }
 
-        // PUT: api/User/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        [HttpDelete("{userHash}")]
+        public async Task<IActionResult> DeleteUser(string userHash)
         {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
+            var userFound = _context.UserExists(userHash, out var user);
+            if (!userFound) return NotFound();
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Users.Remove(user!);
+            await _context.SaveChangesAsync();
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok();
         }
 
-        // POST: api/User
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(PostTestUserRequest userRequest)
         {
@@ -89,32 +47,44 @@ namespace API.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, new UserResponse(user));
+            return CreatedAtAction("GetUser", new { userHash = user.EmailHash }, new UserResponse(user));
         }
 
-        // DELETE: api/User/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        [HttpPut("{userHash}/nickname")]
+        public async Task<IActionResult> PutNickname(string userHash, [FromBody] string nickname)
         {
-            if (_context.Users == null)
-            {
-                return NotFound();
-            }
-            var user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            var userFound = _context.UserExists(userHash, out var user);
+            if (!userFound) return NotFound();
 
-            _context.Users.Remove(user);
+            user!.Nickname = nickname;
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool UserExists(int id)
+        [HttpPut("{userHash}/theme")]
+        public async Task<IActionResult> PutTheme(string userHash, [FromBody] string theme)
         {
-            return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
+            var userFound = _context.UserExists(userHash, out var user);
+            if (!userFound) return NotFound();
+
+            user!.Theme = theme;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPut("{userHash}/locations")]
+        public async Task<IActionResult> PutLocations(string userHash, [FromBody] string[] locations)
+        {
+            var userFound = _context.UserExists(userHash, out var user);
+            if (!userFound) return NotFound();
+
+            user!.Locations.Clear();
+            locations.ToList().ForEach(location => user.Locations.Add( new Location() {Name = location} ));
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }

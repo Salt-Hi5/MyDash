@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using API.Services.Hasher;
 
 namespace API.Models; 
 
@@ -10,14 +11,14 @@ public class User
     public int Id {get; set; }
     public string EmailHash {get; set;}
     public List<Location> Locations {get; set;} = new List<Location>();
-    public string NickName {get; set;}
+    public string Nickname {get; set;}
     public string Theme {get; set;} = "Standard"; 
 
     public User() {}
     public User(PostTestUserRequest userRequest)
     {
-        EmailHash = userRequest.Email;
+        EmailHash = Hasher.GetHash(userRequest.Email);
         Locations.Add( new Location() {Name = userRequest.Location} );
-        NickName = userRequest.NickName;
+        Nickname = userRequest.Nickname;
     }
 }

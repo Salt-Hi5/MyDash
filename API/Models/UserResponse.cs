@@ -8,7 +8,7 @@ public class UserResponse
 {
     public string EmailHash {get; set;}
     public List<string> Locations {get; set;}
-    public string NickName {get; set;}
+    public string Nickname {get; set;}
     public string Theme {get; set;} = "Standard";
 
     public UserResponse() {}
@@ -16,7 +16,7 @@ public class UserResponse
     {
         EmailHash = user.EmailHash;
         Locations = user.Locations.Select(location => location.Name).ToList();
-        NickName = user.NickName;
+        Nickname = user.Nickname;
         Theme = user.Theme;
     }
 }
