@@ -9,7 +9,8 @@ builder.Services.AddCors(options =>
         builder => builder
             .AllowAnyMethod()
             //.AllowCredentials()
-            .WithOrigins("https://calm-water-0269dfc03.2.azurestaticapps.net")
+            //.WithOrigins("https://calm-water-0269dfc03.2.azurestaticapps.net")
+            .AllowAnyOrigin()
             .AllowAnyHeader()
         )
 );
