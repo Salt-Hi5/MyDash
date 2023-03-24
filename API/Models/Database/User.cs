@@ -1,6 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using API.Services.Hasher;
 
 namespace API.Models; 
 
@@ -18,7 +15,14 @@ public class User
     public User(PostTestUserRequest userRequest)
     {
         EmailHash = Hasher.GetHash(userRequest.Email);
-        Locations.Add( new Location() {Name = userRequest.Location} );
+        Locations.Add( new Location() 
+        {
+            Name = userRequest.Location,
+            Region = "Some Region",
+            Country = "Some Country",
+            Timezone = userRequest.Location,
+            Url = "Who the fuck knows?"
+        });
         Nickname = userRequest.Nickname;
     }
 }

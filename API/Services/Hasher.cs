@@ -1,7 +1,5 @@
-using System.Security.Cryptography;
-using System.Text;
 
-namespace API.Services.Hasher;
+namespace API.Services;
 
 public static class Hasher
 {
