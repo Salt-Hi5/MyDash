@@ -13,6 +13,8 @@ function App() {
     initialSetup();
   }, []);
 
+  if (users === null) return <div>Loading...</div>
+
   return (
     <div className="App">
       <h1 className="header">
