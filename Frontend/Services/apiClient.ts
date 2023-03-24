@@ -1,20 +1,9 @@
+import { User } from "../Types/Types";
 
-export const getUser = (): string => {
-    let user = fetch()
-    return "";
+export const getUsers = async (): Promise<User[]> => {
+    const response = await fetch("https://mydashapi.azurewebsites.net/api/User");
+    if (response.status === 200) {
+        return await response.json() as User[];
+    }
+    return [];
 }
-
-/*
-
-20.26.169.10
-20.26.169.34,
-20.26.170.58,
-20.26.169.131,
-20.26.169.226,
-20.26.169.254,
-
-,
-20.90.134.22
-
-
-*/
