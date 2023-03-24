@@ -12,7 +12,7 @@ builder.Services.AddCors(options =>
             //.WithOrigins("https://calm-water-0269dfc03.2.azurestaticapps.net")
             .AllowAnyOrigin()
             .AllowAnyHeader()
-        )
+    )
 );
 
 builder.Services.AddControllers();
@@ -24,7 +24,7 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
+app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
