@@ -13,7 +13,7 @@ function App() {
     initialSetup();
   }, []);
 
-  if (users === null) return <div>Loading...</div>
+  if (users.length === 0) return <div>Loading...</div>
 
   return (
     <div className="App">
