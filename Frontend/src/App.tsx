@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React, { useState, useEffect } from 'react'
 import { User } from "../Types/Types"
 import { getUsers } from "../Services/apiClient"
 import './App.css'
@@ -17,9 +15,9 @@ function App() {
 
   return (
     <div className="App">
-      <p className="read-the-docs">
+      <h1 className="header">
         Welcome {users[0].nickname}!
-      </p>
+      </h1>
     </div>
   )
 }
