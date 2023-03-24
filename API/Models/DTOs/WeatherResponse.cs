@@ -1,6 +1,10 @@
 
 namespace API.Models; 
 
+/*
+This is what we get when searching for the weather. 
+*/
+
 public class WeatherResponse
 {
 

@@ -36,31 +36,31 @@ public class UserController : ControllerBase
     }
 
     [HttpPut("{userHash}/nickname")]
-    public async Task<IActionResult> PutNickname(string userHash, [FromBody] string nickname)
+    public async Task<IActionResult> PutNickname(string userHash, [FromBody] string nickname) // Adds a nickname to the user. 
     {
         var userFound = _context.UserExists(userHash, out var user);
         if (!userFound) return NotFound();
 
-        user!.Nickname = nickname;
+        user!.Nickname = nickname; // User defined in UserExists. The "!" prevents  "dereference null reference".
         await _context.SaveChangesAsync();
 
         return NoContent();
     }
 
     [HttpPut("{userHash}/theme")]
-    public async Task<IActionResult> PutTheme(string userHash, [FromBody] string theme)
+    public async Task<IActionResult> PutTheme(string userHash, [FromBody] string theme) // Adds a theme to the user. 
     {
         var userFound = _context.UserExists(userHash, out var user);
         if (!userFound) return NotFound();
 
-        user!.Theme = theme;
+        user! .Theme = theme;   
         await _context.SaveChangesAsync();
 
         return NoContent();
     }
 
     [HttpPut("{userHash}/locations")]
-    public async Task<IActionResult> PutLocations(string userHash, [FromBody] string[] locations)
+    public async Task<IActionResult> PutLocations(string userHash, [FromBody] string[] locations) // Adds a new location to the user. 
     {
         var userFound = _context.UserExists(userHash, out var user);
         if (!userFound) return NotFound();

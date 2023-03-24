@@ -18,7 +18,7 @@ public class User
         Locations.Add( new Location() 
         {
             Name = userRequest.Location,
-            Region = "Some Region",
+            // Region = "Some Region",
             Country = "Some Country",
             Timezone = userRequest.Location,
             Url = "Who the fuck knows?"
