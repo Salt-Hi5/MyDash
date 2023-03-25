@@ -4,9 +4,9 @@ namespace API.Models;
 public class PostTestUserRequest
 {
     [Required]
-    public string Email {get; set;}
+    public string? Email {get; set;}
     [Required]
-    public string Location {get; set;}
+    public string? LocationUrl {get; set;}
     [Required]
-    public string Nickname {get; set;}
+    public string? Nickname {get; set;}
 }

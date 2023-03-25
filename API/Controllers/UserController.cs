@@ -6,7 +6,12 @@ namespace API.Controllers;
 public class UserController : ControllerBase
 {
     private readonly UserContext _context;
-    public UserController(UserContext context) => _context = context;
+    private readonly IConfiguration _config;
+    public UserController(UserContext context, IConfiguration config)
+    {
+        _context = context;
+        _config = config;
+    } 
 
     [HttpGet]
     public ActionResult<IEnumerable<UserResponse>> GetUsers()
@@ -28,14 +33,14 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<User>> PostUser(PostTestUserRequest userRequest)
     {
-        var user = new User(userRequest);
+        var user = new User(userRequest, _config);
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
         return CreatedAtAction("GetUser", new { userHash = user.EmailHash }, new UserResponse(user));
     }
 
-    [HttpPut("{userHash}/nickname")]
+    [HttpPatch("{userHash}/nickname")]
     public async Task<IActionResult> PutNickname(string userHash, [FromBody] string nickname) // Adds a nickname to the user. 
     {
         var userFound = _context.UserExists(userHash, out var user);
@@ -47,7 +52,7 @@ public class UserController : ControllerBase
         return NoContent();
     }
 
-    [HttpPut("{userHash}/theme")]
+    [HttpPatch("{userHash}/theme")]
     public async Task<IActionResult> PutTheme(string userHash, [FromBody] string theme) // Adds a theme to the user. 
     {
         var userFound = _context.UserExists(userHash, out var user);
@@ -59,14 +64,14 @@ public class UserController : ControllerBase
         return NoContent();
     }
 
-    [HttpPut("{userHash}/locations")]
-    public async Task<IActionResult> PutLocations(string userHash, [FromBody] string[] locations) // Adds a new location to the user. 
+    [HttpPatch("{userHash}/locations")]
+    public async Task<IActionResult> PutLocations(string userHash, [FromBody] string[] locationUrls) // Adds a new location to the user. 
     {
         var userFound = _context.UserExists(userHash, out var user);
         if (!userFound) return NotFound();
 
         user!.Locations.Clear();
-        locations.ToList().ForEach(location => user.Locations.Add(new Location() { Name = location }));
+        locationUrls.ToList().ForEach(locationUrl => user.Locations.Add(new Location(locationUrl, _config)));
         await _context.SaveChangesAsync();
 
         return NoContent();

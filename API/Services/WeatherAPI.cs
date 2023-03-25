@@ -1,36 +1,61 @@
 
 namespace API.Services;
 
+/*
+For an otherview of how the WeatherAPI works, see "WeatherController.cs" in the Backend. 
+*/
+
 public class WeatherAPI
 {
+    private readonly IConfiguration _config;
+    private readonly string _apiKey;
     private HttpClient _client;
-    private string _apiKey;
     private string _baseUrl;
     private string _locationSearchUrl;
     private string _currentWeatherUrl;
+    private string _timeZoneUrl;
 
-    public WeatherAPI()
+
+
+
+    public WeatherAPI(IConfiguration config) // Constructor 
     {
+        _config = config;
         _client = new HttpClient();
-        _apiKey = ApiKeys.WeatherApi;
+        _apiKey = _config["WeatherApi"]!;
         _baseUrl = "https://api.weatherapi.com/v1";
         _locationSearchUrl = $"{_baseUrl}/search.json?key={_apiKey}&q=";
         _currentWeatherUrl = $"{_baseUrl}/current.json?key={_apiKey}&q=";
+        _timeZoneUrl = $"{_baseUrl}/timezone.json?key={_apiKey}&q=";   
     }
 
-    public async Task<List<WeatherLocation>> SearchLocations(string searchString)
+    public async Task<List<WeatherApiLocation>> SearchLocations(string searchString) // What does this do??? 
     {
         var response = await _client.GetAsync(_locationSearchUrl + searchString);
-        var locations = await JsonSerializer.DeserializeAsync<List<WeatherLocation>>(await response.Content.ReadAsStreamAsync());
+        var locations = await JsonSerializer.DeserializeAsync<List<WeatherApiLocation>>(await response.Content.ReadAsStreamAsync());
 
-        return locations ?? new List<WeatherLocation>();
+        return locations ?? new List<WeatherApiLocation>();
     }
 
-    public async Task<WeatherResponse> CurrentWeather(string location)
+    public async Task<string> Timezone(string locationUrl) 
+    {
+        var response = await _client.GetStreamAsync(_timeZoneUrl + locationUrl);
+        var location = await JsonSerializer.DeserializeAsync<WeatherApiLocationResponse>(response);
+        return location?.Location?.Timezone ?? "No timezone could be retrieved";
+    }
+
+    public async Task<WeatherApiWeatherResponse> CurrentWeather(string location)
     {
         var response = await _client.GetAsync(_currentWeatherUrl + location);
-        var currentWeather = await JsonSerializer.DeserializeAsync<WeatherResponse>(await response.Content.ReadAsStreamAsync());
+        var currentWeather = await JsonSerializer.DeserializeAsync<WeatherApiWeatherResponse>(await response.Content.ReadAsStreamAsync());
 
-        return currentWeather ?? new WeatherResponse();
+        return currentWeather ?? new WeatherApiWeatherResponse();
+    }
+
+    public string[] GetApiUrl()
+    {
+        return new string[] {
+            _timeZoneUrl, _currentWeatherUrl, _locationSearchUrl
+        };
     }
 }

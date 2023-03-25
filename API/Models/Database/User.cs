@@ -12,17 +12,10 @@ public class User
     public string Theme {get; set;} = "Standard"; 
 
     public User() {}
-    public User(PostTestUserRequest userRequest)
+    public User(PostTestUserRequest userRequest, IConfiguration config)
     {
         EmailHash = Hasher.GetHash(userRequest.Email);
-        Locations.Add( new Location() 
-        {
-            Name = userRequest.Location,
-            // Region = "Some Region",
-            Country = "Some Country",
-            Timezone = userRequest.Location,
-            Url = "Who the fuck knows?"
-        });
+        Locations.Add(new Location(userRequest.LocationUrl, config)); //  replace locationUrl with user IP
         Nickname = userRequest.Nickname;
     }
 }
