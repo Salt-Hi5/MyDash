@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext, Dispatch, SetStateAction } f
 import { User, UserLocation } from "../Types/Types"
 import { getUsers } from "../Services/apiClient"
 import '../CSS/App.css'
+import { WeatherWidget } from './WeatherWidget';
 
 interface UserContextValue {
   user: User;
@@ -20,9 +21,12 @@ function App() {
   
   useEffect(() => {
     const initialSetup = async () => {
-      setUser((await getUsers())[-1]);
+      const users = await getUsers();
+      const [lastItem] = users.slice(-1);
+      setUser(lastItem);
     }
     initialSetup();
+    
   }, []);
 
   if (user === undefined) return <div>Loading...</div>
@@ -32,6 +36,7 @@ function App() {
       <h1 className="header">
         Welcome {user.nickname}!
       </h1>
+      <WeatherWidget />
     </UserContext.Provider>
   )
 }

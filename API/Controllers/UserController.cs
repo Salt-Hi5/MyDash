@@ -14,20 +14,20 @@ public class UserController : ControllerBase
     } 
 
     [HttpGet]
-    public ActionResult<IEnumerable<UserResponse>> GetUsers()
+    public ActionResult<IEnumerable<FrontendUserResponse>> GetUsers()
     {
         return _context.Users
             .Include(user => user.Locations)
-            .Select(user => new UserResponse(user))
+            .Select(user => new FrontendUserResponse(user))
             .ToList();
     }
 
     [HttpGet("{userHash}")]
-    public ActionResult<UserResponse> GetUser(string userHash)
+    public ActionResult<FrontendUserResponse> GetUser(string userHash)
     {
         var userFound = _context.UserExists(userHash, out var user);
         if (!userFound) return NotFound();
-        return new UserResponse(user!);
+        return new FrontendUserResponse(user!);
     }
 
     [HttpPost]
@@ -37,7 +37,7 @@ public class UserController : ControllerBase
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetUser", new { userHash = user.EmailHash }, new UserResponse(user));
+        return CreatedAtAction("GetUser", new { userHash = user.EmailHash }, new FrontendUserResponse(user));
     }
 
     [HttpPatch("{userHash}/nickname")]

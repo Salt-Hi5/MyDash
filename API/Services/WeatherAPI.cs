@@ -15,9 +15,6 @@ public class WeatherAPI
     private string _currentWeatherUrl;
     private string _timeZoneUrl;
 
-
-
-
     public WeatherAPI(IConfiguration config) // Constructor 
     {
         _config = config;
@@ -29,7 +26,7 @@ public class WeatherAPI
         _timeZoneUrl = $"{_baseUrl}/timezone.json?key={_apiKey}&q=";   
     }
 
-    public async Task<List<WeatherApiLocation>> SearchLocations(string searchString) // What does this do??? 
+    public async Task<List<WeatherApiLocation>> SearchLocations(string searchString) // Gets the location from that the user searched for, e.g "London". 
     {
         var response = await _client.GetAsync(_locationSearchUrl + searchString);
         var locations = await JsonSerializer.DeserializeAsync<List<WeatherApiLocation>>(await response.Content.ReadAsStreamAsync());
@@ -37,11 +34,11 @@ public class WeatherAPI
         return locations ?? new List<WeatherApiLocation>();
     }
 
-    public async Task<string> Timezone(string locationUrl) 
+    public async Task<string> Timezone(string locationUrl)  // <<< DEFINE THIS 
     {
         var response = await _client.GetStreamAsync(_timeZoneUrl + locationUrl);
-        var location = await JsonSerializer.DeserializeAsync<WeatherApiLocationResponse>(response);
-        return location?.Location?.Timezone ?? "No timezone could be retrieved";
+        var timezoneResponse = await JsonSerializer.DeserializeAsync<WeatherApiTimezoneResponse>(response);
+        return timezoneResponse?.Location?.Timezone ?? "No timezone could be retrieved";
     }
 
     public async Task<WeatherApiWeatherResponse> CurrentWeather(string location)

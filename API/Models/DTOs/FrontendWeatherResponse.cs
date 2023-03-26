@@ -1,0 +1,16 @@
+
+public class FrontendWeatherResponse 
+{
+    public List<FrontendWeatherResponseObject> WeatherArray { get; set; }
+
+    public FrontendWeatherResponse(User user, WeatherAPI _weatherApi)
+    {
+        WeatherArray = new List<FrontendWeatherResponseObject>();
+        user.Locations.ForEach(location => {
+            WeatherArray.Add(new FrontendWeatherResponseObject() {
+                Url = location.Url,
+                CurrentWeather = _weatherApi.CurrentWeather(location.Url).Result.Weather
+            });
+        });
+    }
+}
