@@ -1,4 +1,6 @@
 
+using Microsoft.AspNetCore.Authorization;
+
 namespace API.Controllers;
 
 [Route("api/[controller]")]
@@ -13,11 +15,12 @@ public class UserController : ControllerBase
         _config = config;
     } 
 
+
     [HttpPost]
     public async Task<ActionResult<FrontendUserResponse>> GetOrCreateUser()
     {
         var credentialExists = Request.Headers.TryGetValue("Credential", out var credential);
-        var ipExists = Request.Headers.TryGetValue("IP", out var ipAddress);
+        var ipExists = Request.Headers.TryGetValue("IpAddress", out var ipAddress);
         if (!credentialExists || !ipExists) return BadRequest();
 
         var payload = await GoogleJsonWebSignature.ValidateAsync(credential);
@@ -82,7 +85,7 @@ public class UserController : ControllerBase
 
     // FOR TESTING PURPOSES -- REMOVE BEFORE GO LIVE OR IMPLEMENT STRICTER CORS
 
-    [HttpPost]
+    [HttpPost("/testUser")]
     public async Task<ActionResult<User>> PostTestUser(NewUserRequestForTesting request)
     {
         var user = new User(request, _config);

@@ -26,6 +26,6 @@ public class Location
         Region = location.Region; 
         Country = location.Country;
         Timezone = timezone;  
-        Url = url;
+        Url = location.Url;
     }
 }

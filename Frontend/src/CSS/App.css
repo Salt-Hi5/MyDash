@@ -41,15 +41,30 @@
   color: #888;
 }
 
-.WeatherWidgetList--WeatherCard {
-  border: solid 1px black; 
-  border-radius: 20px;
-  margin: 10px; 
-  background-color: lightgray;
-}
+
+
+
 
 .LoginScreen {
   display: flex;
   flex-flow: column;
   align-items: center;
 }
+
+.Main {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.WeatherWidgetList--WeatherCard {
+  border: solid 1px black; 
+  border-radius: 20px;
+  margin: 10px; 
+  background-color: rgb(163, 198, 248);
+  width: 300px;
+}
+
+
+
+

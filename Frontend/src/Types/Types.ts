@@ -8,7 +8,7 @@ export type UserLocation = {
 }
 
 export type User = {
-    emailHash: string,
+    userIdHash: string,
     locations: UserLocation[],
     nickname: string,
     theme: string
