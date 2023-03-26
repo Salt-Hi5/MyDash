@@ -34,7 +34,7 @@ public class WeatherAPI
         return locations ?? new List<WeatherApiLocation>();
     }
 
-    public async Task<string> Timezone(string locationUrl)  // <<< DEFINE THIS 
+    public async Task<string> Timezone(string locationUrl)  
     {
         var response = await _client.GetStreamAsync(_timeZoneUrl + locationUrl);
         var timezoneResponse = await JsonSerializer.DeserializeAsync<WeatherApiTimezoneResponse>(response);

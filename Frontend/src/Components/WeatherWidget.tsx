@@ -4,10 +4,10 @@ import { UserContext } from "./App";
 
 export const WeatherWidget = () => {
     const { user } = useContext(UserContext);
-    
+
 
     if (user.locations === undefined) return <p>Loading...</p>
-    return <section>
+    return <section className="WeatherWidgetList">
         
         {user.locations.map(location => 
         <article key={location.name}>
