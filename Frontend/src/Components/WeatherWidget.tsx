@@ -16,7 +16,7 @@ export const WeatherWidget = () => {
         updateWeather();
         const interval = setInterval(() => {
             updateWeather();
-        }, 60000);
+        }, 900000);
         return () => clearInterval(interval);
     }, []);
 

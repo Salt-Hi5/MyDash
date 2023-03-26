@@ -2,7 +2,7 @@ import { User, WeatherResponse } from "../Types/Types";
 import { getIP } from "./GeoLocation";
 var apiUrl = "https://mydashapi.azurewebsites.net/api";
 const apiTestUrl = "https://localhost:7038/api";
-apiUrl = apiTestUrl;
+//apiUrl = apiTestUrl;
 
 export const getUser = async (credential: string): Promise<User> =>  {
 
