@@ -13,31 +13,31 @@ public class UserController : ControllerBase
         _config = config;
     } 
 
-    [HttpGet]
-    public ActionResult<IEnumerable<FrontendUserResponse>> GetUsers()
-    {
-        return _context.Users
-            .Include(user => user.Locations)
-            .Select(user => new FrontendUserResponse(user))
-            .ToList();
-    }
-
-    [HttpGet("{userHash}")]
-    public ActionResult<FrontendUserResponse> GetUser(string userHash)
-    {
-        var userFound = _context.UserExists(userHash, out var user);
-        if (!userFound) return NotFound();
-        return new FrontendUserResponse(user!);
-    }
-
     [HttpPost]
-    public async Task<ActionResult<User>> PostUser(PostTestUserRequest userRequest)
+    public async Task<ActionResult<FrontendUserResponse>> GetOrCreateUser()
     {
-        var user = new User(userRequest, _config);
+        var credentialExists = Request.Headers.TryGetValue("Credential", out var credential);
+        var ipExists = Request.Headers.TryGetValue("IP", out var ipAddress);
+        if (!credentialExists || !ipExists) return BadRequest();
+
+        var payload = await GoogleJsonWebSignature.ValidateAsync(credential);
+        if (payload == null) return Unauthorized();
+
+        var userIdHash = Hasher.GetHash(payload.Subject);
+        var userExists = _context.UserExists(userIdHash, out var user);
+        if (userExists) return Ok(new FrontendUserResponse(user!));
+
+        var request = new NewUserRequest {
+            UserId = payload.Subject,
+            IpAddress = ipAddress!,
+            Nickname = payload.GivenName
+        };
+        user = new User(request, _config);
+
         _context.Users.Add(user);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetUser", new { userHash = user.EmailHash }, new FrontendUserResponse(user));
+        return Ok(new FrontendUserResponse(user));
     }
 
     [HttpPatch("{userHash}/nickname")]
@@ -75,6 +75,38 @@ public class UserController : ControllerBase
         await _context.SaveChangesAsync();
 
         return NoContent();
+    }
+
+
+
+
+    // FOR TESTING PURPOSES -- REMOVE BEFORE GO LIVE OR IMPLEMENT STRICTER CORS
+
+    [HttpPost]
+    public async Task<ActionResult<User>> PostTestUser(NewUserRequestForTesting request)
+    {
+        var user = new User(request, _config);
+        _context.Users.Add(user);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction("GetUser", new { userHash = user.UserIdHash }, new FrontendUserResponse(user));
+    }
+
+    [HttpGet("{userHash}")]
+    public ActionResult<FrontendUserResponse> GetUserByHash(string userHash)
+    {
+        var userFound = _context.UserExists(userHash, out var user);
+        if (!userFound) return NotFound();
+        return new FrontendUserResponse(user!);
+    }
+
+    [HttpGet]
+    public ActionResult<IEnumerable<FrontendUserResponse>> GetAllUsers()
+    {
+        return _context.Users
+            .Include(user => user.Locations)
+            .Select(user => new FrontendUserResponse(user))
+            .ToList();
     }
 
     [HttpDelete("{userHash}")]

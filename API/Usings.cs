@@ -9,3 +9,6 @@ global using System.Text;
 
 global using API.Services;
 global using API.Models;
+
+global using Google.Apis.Auth;
+global using Google.Apis.Auth.OAuth2;

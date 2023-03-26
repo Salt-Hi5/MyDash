@@ -35,3 +35,7 @@ export type Weather = {
 export type WeatherResponse = {
     weatherArray: Weather[]
 }
+
+export type GeoLocationResponse = {
+    IPv4: string
+}
