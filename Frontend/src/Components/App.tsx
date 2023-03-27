@@ -16,9 +16,9 @@ export const App = () => {
     return typeof (user.userIdHash) !== 'undefined';
   }
 
-  return <UserContext.Provider value={{ user, setUser, weatherArray, setWeatherArray }}>
+  return (<UserContext.Provider value={{ user, setUser, weatherArray, setWeatherArray }}>
     {
       isLoggedIn() ? <MainPage /> : <LoginPage />
     }
-  </UserContext.Provider>
+  </UserContext.Provider>)
 }
