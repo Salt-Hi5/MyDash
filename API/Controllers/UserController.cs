@@ -85,7 +85,24 @@ public class UserController : ControllerBase
 
     // FOR TESTING PURPOSES -- REMOVE BEFORE GO LIVE OR IMPLEMENT STRICTER CORS
 
-    [HttpPost("/testUser")]
+    [HttpGet("/testing/User/{userHash}")]
+    public ActionResult<FrontendUserResponse> GetUserByHash(string userHash)
+    {
+        var userFound = _context.UserExists(userHash, out var user);
+        if (!userFound) return NotFound();
+        return new FrontendUserResponse(user!);
+    }
+
+    [HttpGet("/testing/User")]
+    public ActionResult<IEnumerable<FrontendUserResponse>> GetAllUsers()
+    {
+        return _context.Users
+            .Include(user => user.Locations)
+            .Select(user => new FrontendUserResponse(user))
+            .ToList();
+    }
+
+    [HttpPost("/testing/User")]
     public async Task<ActionResult<User>> PostTestUser(NewUserRequestForTesting request)
     {
         var user = new User(request, _config);
@@ -95,24 +112,7 @@ public class UserController : ControllerBase
         return CreatedAtAction("GetUser", new { userHash = user.UserIdHash }, new FrontendUserResponse(user));
     }
 
-    [HttpGet("{userHash}")]
-    public ActionResult<FrontendUserResponse> GetUserByHash(string userHash)
-    {
-        var userFound = _context.UserExists(userHash, out var user);
-        if (!userFound) return NotFound();
-        return new FrontendUserResponse(user!);
-    }
-
-    [HttpGet]
-    public ActionResult<IEnumerable<FrontendUserResponse>> GetAllUsers()
-    {
-        return _context.Users
-            .Include(user => user.Locations)
-            .Select(user => new FrontendUserResponse(user))
-            .ToList();
-    }
-
-    [HttpDelete("{userHash}")]
+    [HttpDelete("/testing/User/{userHash}")]
     public async Task<IActionResult> DeleteUser(string userHash)
     {
         var userFound = _context.UserExists(userHash, out var user);
