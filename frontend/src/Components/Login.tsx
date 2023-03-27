@@ -9,13 +9,16 @@ export const LoginPage = () => {
 
     return <main className="LoginScreen">
         <h1>Welcome to MyDash</h1>
-        <GoogleLogin onSuccess={async (credentialResponse: CredentialResponse) => {
-            const user = await getUser(credentialResponse.credential as string);
-            setUser(user);
-        }} onError={() => {
-            console.log("Google Authentication Failed")
-        }}
-            useOneTap
-        />
+        <div className="LoginScreen--LoginButton">
+            <GoogleLogin onSuccess={async (credentialResponse: CredentialResponse) => {
+                const user = await getUser(credentialResponse.credential as string);
+                setUser(user);
+            }} onError={() => {
+                console.log("Google Authentication Failed")
+            }}
+                useOneTap
+            />
+        </div>
+
     </main>
 }

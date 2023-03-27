@@ -15,7 +15,6 @@ public class UserController : ControllerBase
         _config = config;
     } 
 
-
     [HttpPost]
     public async Task<ActionResult<FrontendUserResponse>> GetOrCreateUser()
     {
@@ -42,7 +41,7 @@ public class UserController : ControllerBase
 
         return Ok(new FrontendUserResponse(user));
     }
-
+ 
     [HttpPatch("{userHash}/nickname")]
     public async Task<IActionResult> PutNickname(string userHash, [FromBody] string nickname) // Adds a nickname to the user. 
     {
@@ -124,3 +123,4 @@ public class UserController : ControllerBase
         return Ok();
     }
 }
+
