@@ -2,9 +2,8 @@ import { UserContext } from '../Services/UserContext';
 import { User, Weather } from "../Types/Types";
 import { MainPage } from './MainPage';
 import { LoginPage } from './Login';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import '../CSS/App.css';
-import { getWeather } from '../Services/ApiClient';
 
 export const App = () => {
 
@@ -19,7 +18,7 @@ export const App = () => {
 
   return <UserContext.Provider value={{ user, setUser, weatherArray, setWeatherArray }}>
     {
-      isLoggedIn() ? <MainPage /> : <p>Google Stuff</p>
+      isLoggedIn() ? <MainPage /> : <LoginPage />
     }
   </UserContext.Provider>
 }
