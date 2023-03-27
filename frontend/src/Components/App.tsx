@@ -1,9 +1,9 @@
 import { UserContext } from '../Services/UserContext';
 import { User, Weather } from "../Types/Types";
 import { MainPage } from './MainPage';
-import { LoginPage } from './Login';
+import { LoginPage } from './LoginPage';
 import { useState } from 'react';
-import '../CSS/App.css';
+import '/dist/output.css';
 
 export const App = () => {
 

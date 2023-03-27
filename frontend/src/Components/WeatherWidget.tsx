@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from '../Services/UserContext';
 import { getWeather } from "../Services/ApiClient";
 import { DateTime } from 'luxon';
+import '/dist/output.css';
 
 
 export const WeatherWidget = () => {
@@ -32,7 +33,7 @@ export const WeatherWidget = () => {
     }
 
     return stillLoading() ? <span>Loading...</span> :
-        <section className="WeatherWidgetList">
+        <section className="">
             {user.locations.map(location => {
                 const currentWeather = weatherArray.find(weatherLocation => weatherLocation.url === location.url)?.currentWeather;
                 return <article className={`WeatherWidgetList--WeatherCard WeatherCondition__${currentWeather?.condition.text} Time__${currentWeather?.is_day ? "Day" : "Night"}`} key={location.name}>
