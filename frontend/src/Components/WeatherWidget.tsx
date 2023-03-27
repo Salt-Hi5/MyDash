@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from '../Services/UserContext';
 import { getWeather } from "../Services/ApiClient";
 import { DateTime } from 'luxon';
-import '/dist/output.css';
+import '../../dist/output.css';
 
 
 export const WeatherWidget = () => {

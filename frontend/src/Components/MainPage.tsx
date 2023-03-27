@@ -3,7 +3,7 @@ import { UserContext } from '../Services/UserContext';
 import { WeatherWidget } from './WeatherWidget';
 import { SearchWidget } from './SearchWidget';
 import { useContext } from 'react';
-import '/dist/output.css';
+import '../../dist/output.css';
 
 
 export const MainPage = () => {

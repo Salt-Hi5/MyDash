@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import '/dist/output.css';
+import '../../dist/output.css';
+
 
 export const SearchWidget = () => {
     const [searchQuery, setSearchQuery] = useState("")
