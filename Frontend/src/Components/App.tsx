@@ -19,7 +19,7 @@ export const App = () => {
 
   return <UserContext.Provider value={{ user, setUser, weatherArray, setWeatherArray }}>
     {
-      isLoggedIn() ? <MainPage /> : <LoginPage />
+      isLoggedIn() ? <MainPage /> : <p>Google Stuff</p>
     }
   </UserContext.Provider>
 }
