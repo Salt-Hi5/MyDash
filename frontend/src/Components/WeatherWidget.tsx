@@ -2,9 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from '../Services/UserContext';
 import { getWeather, patchLocations } from "../Services/ApiClient";
 import { DateTime } from 'luxon';
-import { LocationSearch } from "./LocationSearch";
-import { UserLocation } from "../Types/Types";
-
+import { LocationSearch } from "./WeatherWidgetLocationSearch";
+import { WeatherWidgetElement } from "./WeatherWidgetElement";
 
 
 export const WeatherWidget = () => {
@@ -36,7 +35,6 @@ export const WeatherWidget = () => {
     }
 
     const deleteLocation = async (locationUrl: string) => {
-
         user.locations = user.locations.filter(location => location.url !== locationUrl); 
 
         const resultCode = await patchLocations(user.userIdHash, user.locations.map(location => location.url));
@@ -49,31 +47,9 @@ export const WeatherWidget = () => {
     return stillLoading() ? <span>Loading...</span> :
         <section id="WeatherWidget" className="flex flex-col gap-4">
 
-           
-
-            {user.locations.map(location => {
-                const currentWeather = weatherArray.find(weatherLocation => weatherLocation.url === location.url)?.currentWeather;
-
-                return <article id="WeatherWidgetList" className="grow border border-gray rounded-3xl p-4" key={location.name}>
-                    
-                    <h2>{location.name}</h2>
-                    <h3>{location.country}</h3>
-                    <h2> {currentTime.setZone(location.timezone).toLocaleString(DateTime.TIME_24_WITH_SECONDS)} </h2>
-                    <img src={currentWeather?.condition.icon}></img>
-                    <p>
-                        Condition: {currentWeather?.condition.text} <br />
-                        Temperature: {currentWeather?.temp_c} °C <br />
-                        Feels like: {currentWeather?.feelslike_c} °C <br />
-                        Daynight: {currentWeather?.is_day ? <span>Day</span> : <span>Night</span>} <br />
-                        Rainfall: {currentWeather?.precip_mm} mm <br />
-                        Air pressure: {currentWeather?.pressure_mb} millibar <br />
-                        Visibility: {currentWeather?.vis_km} km <br />
-                        Wind speed: {currentWeather?.wind_kph} km/h <br />
-                        
-                    UV amount: {currentWeather?.uv} <br />
-                    </p>
-                    <button className="" onClick={(e) => deleteLocation(location.url)}>Delete</button>
-                </article>
+            {user.locations.map((location) => {
+                const currentWeather = weatherArray.find(weather => weather.url === location.url)?.currentWeather;
+                return <WeatherWidgetElement location={location} currentWeather={currentWeather} currentTime={currentTime} deleteLocation={deleteLocation} />
             })}
 
             <LocationSearch />

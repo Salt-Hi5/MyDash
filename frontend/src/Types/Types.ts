@@ -1,17 +1,18 @@
 
+export type User = {
+    userIdHash: string,
+    locations: UserLocation[],
+    nickname: string,
+    theme: string,
+    picture: string
+}
+
 export type UserLocation = {
     name: string,
     region: string,
     country: string,
     timezone: string,
     url: string
-}
-
-export type User = {
-    userIdHash: string,
-    locations: UserLocation[],
-    nickname: string,
-    theme: string
 }
 
 export type Weather = {

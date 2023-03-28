@@ -10,6 +10,7 @@ public class User
     public List<Location> Locations {get; set;} = new List<Location>();
     public string Nickname {get; set;}
     public string Theme {get; set;} = "Standard"; 
+    public string? Picture {get; set;}
 
     public User() {}
     public User(NewUserRequest request, IConfiguration config)
@@ -17,6 +18,7 @@ public class User
         UserIdHash = Hasher.GetHash(request.UserId);
         Locations.Add( new Location(request.IpAddress, config) );
         Nickname = request.Nickname;
+        Picture = request.Picture;
     }
     public User(NewUserRequestForTesting request, IConfiguration config)
     {

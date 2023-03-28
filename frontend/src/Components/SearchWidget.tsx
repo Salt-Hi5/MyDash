@@ -12,7 +12,7 @@ export const SearchWidget = () => {
     };
 
     return (
-        <input id="SearchBar" className="w-4/5 mt-20 p-2 border border-gray rounded-3xl" type="text" placeholder="Search Google" 
+        <input id="SearchBar" className="opacity-90 w-4/5 mt-20 py-2 px-6 rounded-3xl" type="text" placeholder="Search Google" autoFocus autoComplete="off"
             onChange={(event) => setSearchQuery(event.target.value)} 
             onKeyDown={handleKeyDown} 
         />

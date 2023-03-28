@@ -1,5 +1,7 @@
+import { DateTime } from "luxon";
 import { createContext, Dispatch, SetStateAction } from "react";
-import { User, Weather } from "../Types/Types";
+import { User, UserLocation, Weather } from "../Types/Types";
+
 
 interface UserContextValue {
     user: User;
@@ -9,7 +11,6 @@ interface UserContextValue {
     weatherArray: Weather[];
     setWeatherArray: Dispatch<SetStateAction<Weather[]>>;
 }
-
 export const UserContext = createContext<UserContextValue>({ 
     user: {} as User,
     setUser: () => { },

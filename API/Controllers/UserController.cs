@@ -32,7 +32,8 @@ public class UserController : ControllerBase
         var request = new NewUserRequest {
             UserId = payload.Subject,
             IpAddress = ipAddress!,
-            Nickname = payload.GivenName
+            Nickname = payload.GivenName,
+            Picture = payload.Picture
         };
         user = new User(request, _config);
 

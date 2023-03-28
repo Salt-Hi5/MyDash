@@ -9,4 +9,6 @@ public class NewUserRequest
     public string IpAddress {get; set;}
     [Required]
     public string Nickname {get; set;}
+    public string? Picture {get; set;}
+
 }
