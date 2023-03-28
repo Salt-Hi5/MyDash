@@ -2,7 +2,7 @@ import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
 import { UserContext } from '../Services/UserContext';
 import { getUser } from "../Services/ApiClient";
 import { useContext } from 'react';
-import '../../dist/output.css';
+
 
 
 export const LoginPage = () => {

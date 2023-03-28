@@ -24,7 +24,7 @@ public class WeatherController: ControllerBase
     }
 
     [HttpGet("location/{searchTerm}")]
-    public async Task<List<WeatherApiLocation>> GetSomeRandomTimezone(string searchTerm)
+    public async Task<List<WeatherApiLocation>> GetWeatherLocations(string searchTerm)
     {
         return await _weatherApi.SearchLocations(searchTerm);
     }
