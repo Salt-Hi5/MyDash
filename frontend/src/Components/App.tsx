@@ -3,7 +3,7 @@ import { User, Weather } from "../Types/Types";
 import { MainPage } from './MainPage';
 import { LoginPage } from './LoginPage';
 import { useState } from 'react';
-import '/dist/output.css'
+import '../index.css'
 
 
 
