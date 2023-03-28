@@ -25,5 +25,6 @@ public class User
         UserIdHash = Hasher.GetHash(request.UserId);
         Locations.Add( new Location(request.LocationUrl, config) );
         Nickname = request.Nickname;
+        Picture = request.Picture;
     }
 }

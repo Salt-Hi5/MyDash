@@ -9,4 +9,5 @@ public class NewUserRequestForTesting
     public string LocationUrl {get; set;}
     [Required]
     public string Nickname {get; set;}
+    public string? Picture {get; set;}
 }
