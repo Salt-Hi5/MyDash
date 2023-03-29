@@ -14,12 +14,18 @@ public class Location
     public string Timezone { get; set; }
     public string Url { get; set; }
 
-    public Location() { } // The database needs an empty constructor to work if the model includes a non-empty constructor. 
 
-    public Location(string url, IConfiguration config)
-    {
-        var weatherAPI = new WeatherAPI(config);
-        var location = weatherAPI.SearchLocations(url).Result[0];
+    public Location() {} // The database needs an empty constructor to work if the model includes a non-empty constructor. 
+    
+    public Location(string url, IConfiguration config, bool ipBasedLocation = false) 
+    { 
+        var weatherAPI = new WeatherAPI(config); 
+        var location =  weatherAPI.SearchLocations(url).Result[0];
+        if (ipBasedLocation)
+        {
+            location =  weatherAPI.SearchLocations(location.Url!).Result[0];
+        }
+        
         var timezone = weatherAPI.Timezone(url).Result;
 
         Name = location.Name;
