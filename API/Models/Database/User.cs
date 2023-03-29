@@ -16,7 +16,7 @@ public class User
     public User(NewUserRequest request, IConfiguration config)
     {
         UserIdHash = Hasher.GetHash(request.UserId);
-        Locations.Add( new Location(request.IpAddress, config) );
+        Locations.Add( new Location(request.IpAddress, config, true) );
         Nickname = request.Nickname;
         Picture = request.Picture;
     }
