@@ -9,7 +9,7 @@ import { WeatherWidgetElement } from "./WeatherWidgetElement";
 export const WeatherWidget = () => {
     const { user, weatherArray, setWeatherArray } = useContext(UserContext);
     const [currentTime, setCurrentTime] = useState<DateTime>(DateTime.now());
-    const [locationSearchTerm, setLocationSearchTerm] = useState<string>("");
+    // const [locationSearchTerm, setLocationSearchTerm] = useState<string>("");
 
     useEffect(() => {
         const updateWeather = async () => {
@@ -31,7 +31,7 @@ export const WeatherWidget = () => {
     }, []);
 
     const stillLoading = (): boolean => {
-        return typeof (weatherArray) === 'undefined';
+        return typeof (weatherArray) === "undefined";
     }
 
     const deleteLocation = async (locationUrl: string) => {
@@ -48,8 +48,8 @@ export const WeatherWidget = () => {
         <section id="WeatherWidget" className="flex flex-col gap-4">
 
             {user.locations.map((location) => {
-                const currentWeather = weatherArray.find(weather => weather.url === location.url)?.currentWeather;
-                return <WeatherWidgetElement location={location} currentWeather={currentWeather} currentTime={currentTime} deleteLocation={deleteLocation} />
+                const weather = weatherArray.find(weather => weather.url === location.url);
+                return <WeatherWidgetElement key={location.url} location={location} timezone={weather?.timezone} currentWeather={weather?.currentWeather} currentTime={currentTime} deleteLocation={deleteLocation} />
             })}
 
             <LocationSearch />

@@ -8,6 +8,7 @@ import { UserLocation, Weather } from "../Types/Types";
 interface WeatherWidgetElementProps {
     location: UserLocation;
     currentTime: DateTime;
+    timezone?: string;
     currentWeather?: {
         temp_c: number,
         is_day: number,
@@ -28,11 +29,12 @@ interface WeatherWidgetElementProps {
 export const WeatherWidgetElement = (props: WeatherWidgetElementProps) => {
     const location = props.location;
     const weather = props.currentWeather;
-    const time = props.currentTime;
-    const deleteLocation = props.deleteLocation;
 
     useEffect(() => {
-        console.log(location)
+        
+        if (typeof (location.timezone) === "undefined")
+            console.log(`Timezone for ${location.name} was empty. Setting to ${props.timezone}`);
+            location.timezone = props.timezone ?? "";
     }, [])
 
     const isDay = (): boolean => {
@@ -46,7 +48,7 @@ export const WeatherWidgetElement = (props: WeatherWidgetElementProps) => {
                 <h1 className="text-2xl">{location.name}</h1>
                 <h2 className="">{location.country}</h2>
             </div>
-            <span className="text-4xl">{time.setZone(location.timezone).toLocaleString(DateTime.TIME_24_SIMPLE)}</span>
+            <span className="text-4xl">{props.currentTime.setZone(props.timezone).toLocaleString(DateTime.TIME_24_SIMPLE)}</span>
         </div>
 
         <div className="flex flex-col justify-center items-center my-2">
@@ -70,7 +72,7 @@ export const WeatherWidgetElement = (props: WeatherWidgetElementProps) => {
             </p>
         </div>
 
-        <button className={`self-center mt-4 text-xs font-light px-2 rounded-3xl ${ isDay() ? "hover:bg-slate-700 hover:text-white" : "hover:bg-white hover:text-black"}`} onClick={(e) => deleteLocation(location.url)}>Delete</button>
+        <button className={`self-center mt-4 text-xs font-light px-2 rounded-3xl ${ isDay() ? "hover:bg-slate-700 hover:text-white" : "hover:bg-white hover:text-black"}`} onClick={(e) => props.deleteLocation(location.url)}>Delete</button>
 
 
     </article>

@@ -9,6 +9,7 @@ public class FrontendWeatherResponse
         user.Locations.ForEach(location => {
             WeatherArray.Add(new FrontendWeatherResponseObject() {
                 Url = location.Url,
+                Timezone = location.Timezone,
                 CurrentWeather = _weatherApi.CurrentWeather(location.Url).Result.Weather
             });
         });

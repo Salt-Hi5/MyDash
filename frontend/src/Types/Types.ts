@@ -17,6 +17,7 @@ export type UserLocation = {
 
 export type Weather = {
     url: string,
+    timezone: string,
     currentWeather: {
         temp_c: number,
         is_day: number,

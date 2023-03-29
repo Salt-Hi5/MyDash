@@ -10,6 +10,7 @@ public class FrontendUserResponse
     public List<FrontendLocationResponse>? Locations {get; set;}
     public string? Nickname {get; set;}
     public string? Theme {get; set;}
+    public string? Picture {get; set;}
 
     public FrontendUserResponse() {}
     public FrontendUserResponse(User user) // Run every time someone requests a user. Extracts from the database the User with its Location. 
@@ -27,5 +28,6 @@ public class FrontendUserResponse
         ).ToList();
         Nickname = user.Nickname;
         Theme = user.Theme;
+        Picture = user.Picture;
     }
 }

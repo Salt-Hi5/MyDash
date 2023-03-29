@@ -1,0 +1,16 @@
+
+
+
+
+* App
+    * LoginPage
+    * MainPage 
+        * NicknameChanger 
+        * SearchWidget -> The google search bar
+        * UserMenu
+        * WeatherWidget -> The menu that contains the weathers 
+            * WeatherWidgetElement  -> Creates each individual weather component 
+            * WeatherWidgetLocationSearch -> The search widget for the location  
+
+
+    * [Other components will be added]

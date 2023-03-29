@@ -50,10 +50,12 @@ export const LocationSearch = () => {
             <ul className="w-full p-2  rounded-3xl cursor-pointer opacity-90 bg-white ">
                 <label className="text-xs px-6">Select the correct location:</label>
                 {
-                    locationSearchResults.map(location => <li className=" px-8 rounded-3xl hover:bg-slate-600 hover:text-white" value={location.url} onClick={(e) => submitNewLocation(location)} >{location.name}, {location.country}</li>)
+                    locationSearchResults.map(location => <li key={location.name} className=" px-8 rounded-3xl hover:bg-slate-600 hover:text-white" value={location.url} onClick={(e) => submitNewLocation(location)} >{location.name}, {location.country}</li>)
                 }
             </ul>
             : null
         }
+       
+        
     </div>
 }
