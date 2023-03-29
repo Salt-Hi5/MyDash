@@ -35,7 +35,7 @@ export const WeatherWidget = () => {
     }
 
     const deleteLocation = async (locationUrl: string) => {
-        user.locations = user.locations.filter(location => location.url !== locationUrl); 
+        user.locations = user.locations.filter(location => location.url !== locationUrl);
 
         const resultCode = await patchLocations(user.userIdHash, user.locations.map(location => location.url));
         if (resultCode !== 204) {

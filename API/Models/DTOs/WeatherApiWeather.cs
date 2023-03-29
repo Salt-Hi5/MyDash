@@ -6,7 +6,7 @@ public class WeatherApiWeather
 {
     [JsonPropertyName("last_updated_epoch")]                        //: 1679614200,
     public int? LastUpdatedEpoch { get; set; }
-    
+
     [JsonPropertyName("last_updated")]                              //: "2023-03-23 23:30",
     public string? LastUpdated { get; set; }
 
@@ -27,22 +27,22 @@ public class WeatherApiWeather
 
     [JsonPropertyName("wind_kph")]                                  //: 22.0,
     public double? WindKilometersPerHour { get; set; }
-    
+
     [JsonPropertyName("wind_degree")]                               //: 230,
     public int? WindDegree { get; set; }
 
     [JsonPropertyName("wind_dir")]                                  //: "SW",
     public string? WindDirection { get; set; }
-    
+
     [JsonPropertyName("pressure_mb")]                               //: 994.0,
     public double? PressureMillibar { get; set; }
 
     [JsonPropertyName("pressure_in")]                               //: 29.35,
     public double? PressureInches { get; set; }
-    
+
     [JsonPropertyName("precip_mm")]                                 //: 0.5,
     public double? PrecipitationMillimeter { get; set; }
-    
+
     [JsonPropertyName("precip_in")]                                 //: 0.02,
     public double? PrecipitationInches { get; set; }
 

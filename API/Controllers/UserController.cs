@@ -13,7 +13,7 @@ public class UserController : ControllerBase
     {
         _context = context;
         _config = config;
-    } 
+    }
 
     [HttpPost]
     public async Task<ActionResult<FrontendUserResponse>> GetOrCreateUser()
@@ -29,7 +29,8 @@ public class UserController : ControllerBase
         var userExists = _context.UserExists(userIdHash, out var user);
         if (userExists) return Ok(new FrontendUserResponse(user!));
 
-        var request = new NewUserRequest {
+        var request = new NewUserRequest
+        {
             UserId = payload.Subject,
             IpAddress = ipAddress!,
             Nickname = payload.GivenName,
@@ -42,7 +43,7 @@ public class UserController : ControllerBase
 
         return Ok(new FrontendUserResponse(user));
     }
- 
+
     [HttpPatch("{userHash}/nickname")]
     public async Task<IActionResult> PutNickname(string userHash, [FromBody] string nickname) // Adds a nickname to the user. 
     {
@@ -61,7 +62,7 @@ public class UserController : ControllerBase
         var userFound = _context.UserExists(userHash, out var user);
         if (!userFound) return NotFound();
 
-        user! .Theme = theme;   
+        user!.Theme = theme;
         await _context.SaveChangesAsync();
 
         return NoContent();
