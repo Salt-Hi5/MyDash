@@ -4,7 +4,7 @@ var apiUrl = "https://mydashapi.azurewebsites.net/api";
 const apiTestUrl = "https://localhost:7038/api";
 //apiUrl = apiTestUrl;
 
-export const getUser = async (credential: string): Promise<User> =>  {
+export const getUser = async (credential: string): Promise<User> => {
 
     const response = await fetch(`${apiUrl}/User`, {
         method: "POST",

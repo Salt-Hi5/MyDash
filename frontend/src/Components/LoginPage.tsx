@@ -6,12 +6,12 @@ import { useContext, useState } from 'react';
 
 export const LoginPage = () => {
     const { setUser } = useContext(UserContext);
-    const [ showLoadingAnimation, setShowLoadingAnimation ] = useState(false);
+    const [showLoadingAnimation, setShowLoadingAnimation] = useState(false);
 
     return (
         <main id="LoginScreen" className="h-screen flex flex-col justify-between items-center">
             <h1 id="WelcomeMessage" className="mt-60 text-7xl">Welcome to MyDash</h1>
-            
+
             {
                 showLoadingAnimation && <img src="./LoadingAnimation.svg" alt="Loading Animation" />
             }

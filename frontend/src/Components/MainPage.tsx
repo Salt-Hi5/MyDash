@@ -26,7 +26,7 @@ export const MainPage = () => {
             </section>
 
             <section id="RightWidgetColumn" className="flex flex-col gap-4 w-1/4 overflow-auto overscroll-contain p-4">
-                
+
                 <UserMenu />
                 <WeatherWidget />
             </section>

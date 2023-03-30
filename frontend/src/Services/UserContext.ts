@@ -11,7 +11,7 @@ interface UserContextValue {
     weatherArray: Weather[];
     setWeatherArray: Dispatch<SetStateAction<Weather[]>>;
 }
-export const UserContext = createContext<UserContextValue>({ 
+export const UserContext = createContext<UserContextValue>({
     user: {} as User,
     setUser: () => { },
     nickname: "",

@@ -6,7 +6,6 @@ import { useState } from 'react';
 import '../index.css'
 
 
-
 export const App = () => {
 
   const [user, setUser] = useState<User>({} as User);

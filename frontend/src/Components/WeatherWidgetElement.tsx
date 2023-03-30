@@ -31,17 +31,17 @@ export const WeatherWidgetElement = (props: WeatherWidgetElementProps) => {
     const weather = props.currentWeather;
 
     useEffect(() => {
-        
+
         if (typeof (location.timezone) === "undefined")
             console.log(`Timezone for ${location.name} was empty. Setting to ${props.timezone}`);
-            location.timezone = props.timezone ?? "";
+        location.timezone = props.timezone ?? "";
     }, [])
 
     const isDay = (): boolean => {
         return (weather?.is_day === 1) ? true : false;
     }
 
-    return <article id="WeatherWidgetElement" className={`opacity-90 grow  rounded-3xl p-4 flex flex-col shadow-md shadow-black ${ isDay() ? "border-slate-900 bg-blue-200 text-black" : "border-white bg-slate-700 text-white"}`} >
+    return <article id="WeatherWidgetElement" className={`opacity-90 grow  rounded-3xl p-4 flex flex-col shadow-md shadow-black ${isDay() ? "border-slate-900 bg-blue-200 text-black" : "border-white bg-slate-700 text-white"}`} >
 
         <div className="flex justify-between">
             <div>
@@ -60,7 +60,7 @@ export const WeatherWidgetElement = (props: WeatherWidgetElementProps) => {
         <div className="flex justify-between">
             <div className="flex flex-col items-start justify-end">
                 <span className="text-4xl">{weather?.temp_c}<span className="text-xs font-light"> °C</span></span>
-                    <span className="text-xs font-light">Feels like: {weather?.feelslike_c} °C</span>
+                <span className="text-xs font-light">Feels like: {weather?.feelslike_c} °C</span>
             </div>
 
             <p className="text-xs font-light text-right">
@@ -68,11 +68,11 @@ export const WeatherWidgetElement = (props: WeatherWidgetElementProps) => {
                 Visibility: {weather?.vis_km} km<br />
                 Pressure: {weather?.pressure_mb} mb<br />
                 Wind speed: {weather?.wind_kph} km/h<br />
-                
+
             </p>
         </div>
 
-        <button className={`self-center mt-4 text-xs font-light px-2 rounded-3xl ${ isDay() ? "hover:bg-slate-700 hover:text-white" : "hover:bg-white hover:text-black"}`} onClick={(e) => props.deleteLocation(location.url)}>Delete</button>
+        <button className={`self-center mt-4 text-xs font-light px-2 rounded-3xl ${isDay() ? "hover:bg-slate-700 hover:text-white" : "hover:bg-white hover:text-black"}`} onClick={(e) => props.deleteLocation(location.url)}>Delete</button>
 
 
     </article>

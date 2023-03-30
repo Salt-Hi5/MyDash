@@ -4,7 +4,7 @@ namespace API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class WeatherController: ControllerBase
+public class WeatherController : ControllerBase
 {
     private readonly UserContext _context;
     private readonly WeatherAPI _weatherApi;
@@ -12,11 +12,11 @@ public class WeatherController: ControllerBase
     {
         _context = context;
         _weatherApi = new WeatherAPI(config);
-    } 
+    }
 
     [HttpGet("{userHash}")]
     public ActionResult<FrontendWeatherResponse> GetWeather(string userHash) // Gets the weather for all locations that the current user (inside the argment) has. 
-    {   
+    {
         var userFound = _context.UserExists(userHash, out var user);
         if (!userFound) return NotFound();
 

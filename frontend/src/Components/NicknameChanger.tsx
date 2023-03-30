@@ -9,7 +9,7 @@ interface NicknameChangerProps {
 
 export const NicknameChanger = (props: NicknameChangerProps) => {
     const { user, setNickname } = useContext(UserContext);
-    const [ newNickname, setNewNickname ] = useState("");
+    const [newNickname, setNewNickname] = useState("");
 
     const handleKeyDown = async (event: React.KeyboardEvent) => {
         if (event.key === 'Escape') {
@@ -38,9 +38,9 @@ export const NicknameChanger = (props: NicknameChangerProps) => {
 
     return (
         <input id="NicknameChanger" value={newNickname} type="text" placeholder="Change Nickname" autoFocus
-            className="opacity-90 w-full h-10 my-auto py-2 px-6 rounded-3xl" 
-            onChange={(event) => setNewNickname(event.target.value)} 
-            onKeyDown={handleKeyDown} 
+            className="opacity-90 w-full h-10 my-auto py-2 px-6 rounded-3xl"
+            onChange={(event) => setNewNickname(event.target.value)}
+            onKeyDown={handleKeyDown}
         />
     )
 }
