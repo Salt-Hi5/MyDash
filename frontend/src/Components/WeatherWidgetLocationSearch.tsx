@@ -12,8 +12,8 @@ export const LocationSearch = () => {
     const [showLocationSearchResults, setShowLocationSearchResults] = useState(false);
 
     useEffect(() => {
+        setLocationSearchResults([]);
         const interval = setInterval(() => {
-            setLocationSearchResults([])
             if (locationSearchTerm === "") {
                 setShowLocationSearchResults(false);
                 return;
@@ -40,6 +40,7 @@ export const LocationSearch = () => {
         }
         user.locations = allLocations;
         setShowLocationSearchResults(false);
+        setLocationSearchTerm("");
     }
 
 
