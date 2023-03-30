@@ -21,7 +21,8 @@ export const MainPage = () => {
     const authorisation = useGoogleLogin({ // ☣️☣️☣️ TEMPORARY VERSION!!! This creates a popup for the user to approve a request for this app to access their data (e.g calendar)
         onSuccess: codeResponse => postGoogleAuthorisation(user.userIdHash, codeResponse.code),
         flow: 'auth-code',
-        scope: "https://www.googleapis.com/auth/calendar"
+        scope: "https://www.googleapis.com/auth/calendar",
+        
     });
 
     return (

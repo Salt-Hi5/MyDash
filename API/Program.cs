@@ -1,22 +1,25 @@
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddDbContext<UserContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyDashDbKey") ?? throw new InvalidOperationException("Connection string 'MyDashDbKey' not found.")));
 
-// Add services to the container.
+builder.Configuration
+    .AddJsonFile("appsettings.json",
+    optional: true,
+    reloadOnChange: true
+);
+
 builder.Services.AddCors(options =>
     options.AddPolicy("CorsPolicy",
         builder => builder
             .AllowAnyMethod()
-            //.AllowCredentials()
-            //.WithOrigins("https://calm-water-0269dfc03.2.azurestaticapps.net")
             .AllowAnyOrigin()
             .AllowAnyHeader()
     )
 );
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

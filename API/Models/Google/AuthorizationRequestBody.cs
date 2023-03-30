@@ -1,5 +1,5 @@
 
-public class GoogleAuthorisationRequestBody {
+public class AuthorisationRequestBody {
 
     [JsonPropertyName("client_i")]
     public string ClientId { get; set; }

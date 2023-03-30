@@ -19,7 +19,22 @@ public class GoogleController : ControllerBase
     {
         _context = context;
         _weatherApi = new WeatherAPI(config);
-        _googleApi = new GoogleAPI(config);
+        _googleApi = new GoogleAPI(context, config);
+    }
+
+    [HttpPost("authorizationCode/{userHash}")]
+    public async Task<IActionResult> PostAuthorizationCode(string userHash)
+    {
+        var userFound = _context.UserExists(userHash, out var user);
+        if (!userFound) return NotFound();
+
+        var authorisationCodeExists = Request.Headers.TryGetValue("AuthorisationCode", out var authorisationCode);
+        if (!authorisationCodeExists) return BadRequest();
+
+        var tokensSuccessfullyRetrieved = await _googleApi.VerifyAuthorisationCode(authorisationCode!, user!);
+        if (!tokensSuccessfullyRetrieved) return Unauthorized();
+
+        return Ok();
     }
 
     [HttpGet("calendarEvents/{userHash}")]
@@ -31,22 +46,4 @@ public class GoogleController : ControllerBase
         var events = _googleApi.GetEvents(user!);
         return Ok(events);
     }
-
-
-    [HttpPost("authorizationCode/{userHash}")]
-    public async Task<IActionResult> PostAuthorizationCode(string userHash)
-    {
-        var userFound = _context.UserExists(userHash, out var user);
-        if (!userFound) return NotFound();
-
-        var authorisationCodeExists = Request.Headers.TryGetValue("AuthorisationCode", out var authorisationCode);
-        if (!authorisationCodeExists) return BadRequest();
-
-        var tokensSuccessfullyRetrieved = _googleApi.VerifyAuthorisationCode(authorisationCode!, user!);
-        if (!tokensSuccessfullyRetrieved) return Unauthorized();
-
-        return Ok();
-    }
-
-    
 }

@@ -90,6 +90,6 @@ export const postGoogleAuthorisation = async (userHash: string, authorisationCod
         console.log("Something went wrong with the Google Authorisation")
 
     }  else {
-        console.log("success")
+        console.log("You have been successfully authorised with Google")
     }
 }
