@@ -11,20 +11,23 @@ export const LocationSearch = () => {
     const [ locationSearchResults, setLocationSearchResults ] = useState<UserLocation[]>([]); // Used for the current available results from the backend for the current search. 
     const [ showLocationSearchResults, setShowLocationSearchResults ] = useState(false);
 
-    const handleKeyDown = async (event: React.KeyboardEvent) => {
-        if (event.key === 'Escape') {
-            setLocationSearchTerm("");
-            setShowLocationSearchResults(false);
-        }
-        if (event.key === 'Enter') {
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setLocationSearchResults([])
             if (locationSearchTerm === "") {
                 setShowLocationSearchResults(false);
                 return;
             }
-            const searchResults = await getWeatherLocations(locationSearchTerm);
-            setLocationSearchResults(searchResults);
+            getWeatherLocations(locationSearchTerm).then(result => setLocationSearchResults(result));
             setShowLocationSearchResults(true);
+        }, 500);
+        return () => clearInterval(interval);
+    }, [locationSearchTerm])
+
+    const handleKeyDown = async (event: React.KeyboardEvent) => {
+        if (event.key === 'Escape') {
             setLocationSearchTerm("");
+            setShowLocationSearchResults(false);
         }
     };
 
