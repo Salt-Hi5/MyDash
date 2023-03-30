@@ -28,11 +28,4 @@ public class WeatherController : ControllerBase
     {
         return await _weatherApi.SearchLocations(searchTerm);
     }
-
-    // Testing requests
-    [HttpGet("/url")]
-    public string[] GetUrls()
-    {
-        return _weatherApi.GetApiUrl();
-    }
 }

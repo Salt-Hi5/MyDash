@@ -2,6 +2,7 @@
 namespace API.Services;
 
 /*
+PURPOSE: Used to manage the HTTP fetches from the frontend to the backend API. 
 For an otherview of how the WeatherAPI works, see "WeatherController.cs" in the Backend. 
 */
 
@@ -47,12 +48,5 @@ public class WeatherAPI
         var currentWeather = await JsonSerializer.DeserializeAsync<WeatherApiWeatherResponse>(await response.Content.ReadAsStreamAsync());
 
         return currentWeather ?? new WeatherApiWeatherResponse();
-    }
-
-    public string[] GetApiUrl()
-    {
-        return new string[] {
-            _timeZoneUrl, _currentWeatherUrl, _locationSearchUrl
-        };
     }
 }

@@ -4,6 +4,8 @@ import { WeatherWidget } from './WeatherWidget';
 import { SearchWidget } from './SearchWidget';
 import { useContext, useEffect } from 'react';
 import { UserMenu } from "./UserMenu";
+import { useGoogleLogin } from "@react-oauth/google";
+import { postGoogleAuthorisation } from "../Services/ApiClient";
 
 
 
@@ -11,8 +13,16 @@ export const MainPage = () => {
     const { user, nickname, setNickname } = useContext(UserContext);
 
     useEffect(() => {
-        setNickname(user.nickname)
+        setNickname(user.nickname);
+        authorisation();
     }, [])
+
+
+    const authorisation = useGoogleLogin({ // ☣️☣️☣️ TEMPORARY VERSION!!! This creates a popup for the user to approve a request for this app to access their data (e.g calendar)
+        onSuccess: codeResponse => postGoogleAuthorisation(user.userIdHash, codeResponse.code),
+        flow: 'auth-code',
+        scope: "https://www.googleapis.com/auth/calendar"
+    });
 
     return (
         <main id="Main" className="absolute inset-0 overflow-auto overscroll-none bg-cover bg-fixed flex" style={{ backgroundImage: `url(${"./Waterfall.jpeg"}` }}>
