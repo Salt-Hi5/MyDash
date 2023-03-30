@@ -26,12 +26,14 @@ public class WeatherAPI
         _timeZoneUrl = $"{_baseUrl}/timezone.json?key={_apiKey}&q=";   
     }
 
-    public async Task<List<WeatherApiLocation>> SearchLocations(string searchString) // Gets the location from that the user searched for, e.g "London". 
+    public Task<List<WeatherApiLocation>?> SearchLocations(string searchString, CancellationToken token) // Gets the location from that the user searched for, e.g "London". 
     {
-        var response = await _client.GetAsync(_locationSearchUrl + searchString);
-        var locations = await JsonSerializer.DeserializeAsync<List<WeatherApiLocation>>(await response.Content.ReadAsStreamAsync());
-
-        return locations ?? new List<WeatherApiLocation>();
+        return new {
+            Task = _client.GetAsync(_locationSearchUrl + searchString)
+            .ContinueWith(antecedent => antecedent.Result.Content.ReadAsStreamAsync()).Unwrap()
+            .ContinueWith(antecedent => JsonSerializer.Deserialize<List<WeatherApiLocation>>(antecedent.Result)),
+            Token = token
+        };
     }
 
     public async Task<string> Timezone(string locationUrl)  

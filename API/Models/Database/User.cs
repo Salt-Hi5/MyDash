@@ -1,4 +1,6 @@
 
+
+
 namespace API.Models; 
 
 public class User
@@ -11,6 +13,9 @@ public class User
     public string Nickname {get; set;}
     public string Theme {get; set;} = "Standard"; 
     public string? Picture {get; set;}
+    
+    [NotMapped]
+    public WeatherLocationApiCallTracker LocationCallTracker { set; get; }
 
     public User() {}
     public User(NewUserRequest request, IConfiguration config)
