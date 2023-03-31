@@ -7,6 +7,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - API/**
+      - .github/workflows/main_mydashgoogleapi.yml
   workflow_dispatch:
 
 jobs:
@@ -31,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: googleapi
 
   deploy:
     runs-on: ubuntu-latest
