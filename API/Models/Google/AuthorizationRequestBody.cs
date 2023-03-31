@@ -1,5 +1,6 @@
 
-public class AuthorisationRequestBody {
+public class AuthorisationRequestBody 
+{
 
     [JsonPropertyName("client_id")]
     public string ClientId { get; set; }
