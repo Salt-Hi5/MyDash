@@ -24,17 +24,18 @@ public class GoogleController : ControllerBase
 
     [HttpPost("authorizationCode/{userHash}")]
     public async Task<IActionResult> PostAuthorizationCode(string userHash)
-    {
+    {  
         var userFound = _context.UserExists(userHash, out var user);
         if (!userFound) return NotFound();
 
         var authorisationCodeExists = Request.Headers.TryGetValue("AuthorisationCode", out var authorisationCode);
-        if (!authorisationCodeExists) return BadRequest();
+        if (!authorisationCodeExists)  {
+            Console.WriteLine("authorisationCodeExists WAS FALSE! "); 
+            return BadRequest();
+        }
 
-        var tokensSuccessfullyRetrieved = await _googleApi.VerifyAuthorisationCode(authorisationCode!, user!);
-        if (!tokensSuccessfullyRetrieved) return Unauthorized();
-
-        return Ok();
+        var tokenStatusCode = await _googleApi.VerifyAuthorisationCode(authorisationCode!, user!);
+        return new StatusCodeResult((int)tokenStatusCode);
     }
 
     [HttpGet("calendarEvents/{userHash}")]

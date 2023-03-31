@@ -1,7 +1,7 @@
 
 public class AuthorisationRequestBody {
 
-    [JsonPropertyName("client_i")]
+    [JsonPropertyName("client_id")]
     public string ClientId { get; set; }
 
     [JsonPropertyName("client_secret")]

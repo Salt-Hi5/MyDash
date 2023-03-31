@@ -35,13 +35,15 @@ public class GoogleAPI
         _clientSecret = _config["Keys:Google:ClientSecret"]!;
 
         _tokenVerificationUrl = "https://oauth2.googleapis.com/token";
-        _redirectUri = "https://salmon-island-036fee403.2.azurestaticapps.net/google-callback";
+        _redirectUri = "https://mydashapi.azurewebsites.net/";
+        //_redirectUri = "https://localhost:7037";
     
         //_url = $"https://www.googleapis.com/calendar/v3/calendars/{_calendarId}/events/";
     }
-
-    public async Task<bool> VerifyAuthorisationCode(string authorisationCode, User user)
-    {
+    
+    public async Task<HttpStatusCode> VerifyAuthorisationCode(string authorisationCode, User user)
+    {   
+        
         var body = new AuthorisationRequestBody {
             ClientId = _clientId,
             ClientSecret = _clientSecret,
@@ -49,17 +51,18 @@ public class GoogleAPI
             GrantType = "authorization_code",
             RedirectUri = _redirectUri
         };
-        var postContent = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8);
+        var jsonContent = JsonSerializer.Serialize(body);
+        var postContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
         var response = await _client.PostAsync(_tokenVerificationUrl, postContent);
-
-        if (response.StatusCode != HttpStatusCode.OK) return false;
+        
+        if (response.StatusCode != HttpStatusCode.OK) return response.StatusCode;
         var responseContent = JsonSerializer.Deserialize<AuthorisationResponseBody>(await response.Content.ReadAsStreamAsync());
 
         user.AccessToken = responseContent?.AccessToken;
         //user.RefreshToken = responseContent?.RefreshToken;
         await _context.SaveChangesAsync();
 
-        return true;
+        return response.StatusCode;
     }
 
     public List<Event> GetEvents(User user) 
