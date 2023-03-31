@@ -1,4 +1,4 @@
-import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
+import { GoogleLogin, CredentialResponse, useGoogleLogin } from '@react-oauth/google';
 import { UserContext } from '../Services/UserContext';
 import { getUser } from "../Services/ApiClient";
 import { useContext, useState } from 'react';
@@ -24,7 +24,9 @@ export const LoginPage = () => {
                 }} onError={() => {
                     console.log("Google Authentication Failed")
                 }}
-                    useOneTap auto_select
+                    useOneTap 
+                    auto_select 
+                   
                 />
             </div>
         </main>

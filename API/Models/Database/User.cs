@@ -12,6 +12,11 @@ public class User
     public string Theme { get; set; } = "Standard";
     public string? Picture { get; set; }
 
+    [JsonIgnore]
+    public string? RefreshToken { get; set; }
+    [JsonIgnore]
+    public string? AccessToken { get; set; }
+
     public User() { }
     public User(NewUserRequest request, IConfiguration config)
     {

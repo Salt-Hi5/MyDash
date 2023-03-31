@@ -1,8 +1,14 @@
 import { User, UserLocation, WeatherResponse } from "../Types/Types";
 import { getIP } from "./GeoLocation";
 var apiUrl = "https://mydashapi.azurewebsites.net/api";
-const apiTestUrl = "https://localhost:7038/api";
+const apiTestUrl = "https://localhost:7037/api";
 //apiUrl = apiTestUrl;
+
+/* DOCUMENT PURPOSE: 
+    * Manage all web calls for the front end. 
+*/
+
+// ==== USER AND WEATHER DATA  ==== 
 
 export const getUser = async (credential: string): Promise<User> => {
 
@@ -68,4 +74,23 @@ export const getWeatherLocations = async (searchTerm: string): Promise<UserLocat
 
     const response = await fetch(`${apiUrl}/Weather/location/${searchTerm}`)
     return await response.json() as UserLocation[];
+}
+
+// ==== GOOGLE ====  
+
+export const postGoogleAuthorisation = async (userHash: string, authorisationCode: string) => {
+    console.log(`The authorisation code received from Google is: ${authorisationCode}`)
+    console.log(`The userHash for the current user is: ${userHash}`) 
+
+    const response = await fetch(`${apiUrl}/Google/authorizationCode/${userHash}`, {
+        method: "POST",
+        headers: {
+            "AuthorisationCode": authorisationCode,
+        }
+    });
+
+    console.log(`The response code was: ${response.status}`) 
+    response.status === 200 ?
+        console.log("Google authorisation successful") :
+        console.log("Google authorisation failed");
 }
