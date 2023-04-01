@@ -6,6 +6,7 @@ import { useContext, useEffect } from 'react';
 import { UserMenu } from "./UserMenu";
 import { useGoogleLogin } from "@react-oauth/google";
 import { postGoogleAuthorisation } from "../Services/ApiClient";
+import axios from 'axios';
 
 
 
@@ -14,7 +15,7 @@ export const MainPage = () => {
 
     useEffect(() => {
         setNickname(user.nickname);
-        authorisation();
+        googleLogin();
     }, [])
 
 
@@ -26,6 +27,17 @@ export const MainPage = () => {
         scope: "https://www.googleapis.com/auth/calendar",
         
     });
+
+    const googleLogin = useGoogleLogin({
+        onSuccess: async ({ code }) => {
+          const tokens = await axios.post('http://localhost:3001/auth/google', {  // http://localhost:3001/auth/google backend that will exchange the code
+            code,
+          });
+      
+          console.log(tokens);
+        },
+        flow: 'auth-code',
+      });
 
     return (
         <main id="Main" className="absolute inset-0 overflow-auto overscroll-none bg-cover bg-fixed flex" style={{ backgroundImage: `url(${"./Waterfall.jpeg"}` }}>
