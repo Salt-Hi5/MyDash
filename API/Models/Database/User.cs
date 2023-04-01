@@ -11,6 +11,7 @@ public class User
     public string Nickname { get; set; }
     public string Theme { get; set; } = "Standard";
     public string? Picture { get; set; }
+    public string? Email { get; set; }
 
     [JsonIgnore]
     public string? RefreshToken { get; set; }
@@ -25,6 +26,7 @@ public class User
 
         Nickname = request.Nickname;
         Picture = request.Picture;
+        Email = request.Email; 
     }
     public User(NewUserRequestForTesting request, IConfiguration config)
     {

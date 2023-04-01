@@ -34,7 +34,8 @@ public class UserController : ControllerBase
             UserId = payload.Subject,
             IpAddress = ipAddress!,
             Nickname = payload.GivenName,
-            Picture = payload.Picture
+            Picture = payload.Picture,
+            Email = payload.Email 
         };
         user = new User(request, _config);
 
