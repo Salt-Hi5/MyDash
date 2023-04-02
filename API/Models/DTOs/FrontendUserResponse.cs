@@ -11,6 +11,7 @@ public class FrontendUserResponse
     public string? Nickname { get; set; }
     public string? Theme { get; set; }
     public string? Picture { get; set; }
+    public string? Email { get; set; }
 
     public FrontendUserResponse() { }
     public FrontendUserResponse(User user) // Run every time someone requests a user. Extracts from the database the User with its Location. 
@@ -29,5 +30,6 @@ public class FrontendUserResponse
         Nickname = user.Nickname;
         Theme = user.Theme;
         Picture = user.Picture;
+        Email = user.Email; 
     }
 }
