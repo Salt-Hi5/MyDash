@@ -27,7 +27,6 @@ jobs:
       - name: npm install
         run: |
           cd googleapi && npm install
-          node src/index.js
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
