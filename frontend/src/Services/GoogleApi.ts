@@ -10,7 +10,7 @@ https://gmail.googleapis.com/gmail/v1/users/example@gmail.com/labels
 */
 
 export const GetThreads = async (tokens: Tokens, email: string): Promise<Threads> => {
-    let apiUrl = `https://gmail.googleapis.com/gmail/v1/users/${email}/threads?format=full`;
+    let apiUrl = `https://gmail.googleapis.com/gmail/v1/users/${email}/threads?maxResults=5`;
 
     const threadsResponse = await fetch(apiUrl, {
         headers: {
@@ -35,7 +35,7 @@ export const GetThreadMessages = async (tokens: Tokens, threadId: string, email:
 }
 
 export const GetMessage = async (tokens: Tokens, messageId: string, email: string) => {
-    const apiUrl = `https://gmail.googleapis.com/gmail/v1/users/${email}/messages/${messageId}`;
+    const apiUrl = `https://gmail.googleapis.com/gmail/v1/users/${email}/messages/${messageId}?format=full`;
     const messageResponse = await fetch(apiUrl, {
         headers: {
             Authorization: `Bearer ${tokens.access_token}`
@@ -45,13 +45,16 @@ export const GetMessage = async (tokens: Tokens, messageId: string, email: strin
     return messageResponse;
 }
 
-export const GetMessageBody = async (tokens: Tokens, messageId: string, attachmentId: string, email: string) => {
-    const apiUrl = `https://gmail.googleapis.com/gmail/v1/users/${email}/messages/${messageId}/attachments/${attachmentId}`;
-    const response = await fetch(apiUrl, {
+export const GetCalendarEvents = async (tokens: Tokens, email: string) => {
+    const date = (new Date()).toISOString();
+
+    const apiUrl = `https://www.googleapis.com/calendar/v3/calendars/${email}/events?singleEvents=true&orderBy=startTime&maxResults=5&timeMin=${date}`; // /${email}/threads?maxResults=5
+    
+    const calendarsResponse = await fetch(apiUrl, {
         headers: {
             Authorization: `Bearer ${tokens.access_token}`
         },
     }).then(response => response.json())
 
-    return response;
+    return calendarsResponse;
 }

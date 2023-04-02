@@ -1,3 +1,4 @@
+import { StringUnitLength } from "luxon"
 
 export type User = {
     userIdHash: string,
@@ -50,24 +51,7 @@ export type Tokens = {
     refrest_token: string,
 }
 
-export type EmailObject = {
 
-
-    /*
-    content (body?) -> The text in the email  
-    subject -> The subject/title of the email 
-    sender  -> The sender of the email 
-
-
-    emailURL -> The link to the users google; this might be saved as an email key instead
-        FOR EXAMPLE: 
-        https://mail.google.com/mail/u/4/#inbox/FMfcgzGslbNKHmDqzjXshVJblpCCZFlW
-        likely has the key "FMfcgzGslbNKHmDqzjXshVJblpCCZFlW". 
-
-        -> This is less important for the MVP though -> It would be enough for now if the app just sends the user to the gmail homepage. 
-    
-    */
-}
 
 export type Threads = {
     threads: [{
@@ -96,6 +80,37 @@ export type MessagePart = { // At the time of writing, this just takes out the a
 export type MessagePartBody = {
     data: string
 }
+
+
+export type EmailObject = {
+    date: string
+    subject: string // 
+    sender: string 
+    emailURL: string // The link to the email. 
+    content: string // 🔥🔥🔥 IDEALY: Include this (although we cant access it at this point)
+
+}
+
+export type Header = {
+    name: string,
+    value: string
+}
+
+export type CalendarObject = {
+    summary: string, 
+    start: TimeAndTimeZone, 
+    htmlLink : string,
+}
+
+export type TimeAndTimeZone = {
+    dateTime: string, 
+    timeZone: string, 
+}
+
+export type Events = {
+    items: string
+}
+
 
 
 
