@@ -14,7 +14,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("CorsPolicy",
         builder => builder
             .AllowAnyMethod()
-            .AllowAnyOrigin()
+            .WithOrigins("https://salmon-island-036fee403.2.azurestaticapps.net/")
             .AllowAnyHeader()
     )
 );
