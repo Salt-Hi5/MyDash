@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: npm install, build, and test
+      - name: npm install
         run: |
           cd googleapi && npm install
           node src/index.js
@@ -56,3 +56,7 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DE9EBA724416411EA0C780BB9BD21753 }}
           package: .
+          
+      - name: Run the server
+        run: |
+          node src/index.js
