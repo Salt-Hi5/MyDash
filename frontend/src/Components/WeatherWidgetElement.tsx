@@ -5,7 +5,7 @@ import { DateTime } from 'luxon';
 import { LocationSearch } from "./WeatherWidgetLocationSearch";
 import { UserLocation, Weather } from "../Types/Types";
 
-interface WeatherWidgetElementProps {
+interface WeatherWidgetLocationProps {
     location: UserLocation;
     currentTime: DateTime;
     timezone?: string;
@@ -26,7 +26,7 @@ interface WeatherWidgetElementProps {
     deleteLocation: (location: string) => {},
 }
 
-export const WeatherWidgetElement = (props: WeatherWidgetElementProps) => {
+export const WeatherWidgetLocation = (props: WeatherWidgetLocationProps) => {
     const location = props.location;
     const weather = props.currentWeather;
 
@@ -41,7 +41,7 @@ export const WeatherWidgetElement = (props: WeatherWidgetElementProps) => {
         return (weather?.is_day === 1) ? true : false;
     }
 
-    return <article id="WeatherWidgetElement" className={`opacity-90 grow  rounded-3xl p-4 flex flex-col shadow-md shadow-black ${isDay() ? "border-slate-900 bg-blue-200 text-black" : "border-white bg-slate-700 text-white"}`} >
+    return <article id="WeatherWidgetElement" className={`opacity-90 grow rounded-3xl p-4 flex flex-col shadow-md shadow-black ${isDay() ? "border-slate-900 bg-blue-200 text-black" : "border-white bg-slate-700 text-white"}`} >
 
         <div className="flex justify-between">
             <div>

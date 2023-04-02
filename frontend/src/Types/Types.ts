@@ -1,3 +1,4 @@
+import { DateTime } from "luxon"
 
 export type User = {
     userIdHash: string,
@@ -40,4 +41,27 @@ export type WeatherResponse = {
 
 export type GeoLocationResponse = {
     IPv4: string
+}
+
+export type EmailItem = {
+    subject: string,
+    from: string,
+    to: string,
+    received: string,
+    body: string
+}
+
+export type CalendarItem = {
+    name: string,
+    startTime: DateTime,
+    endTime: DateTime,
+    location: string,
+    details: string,
+    link: string
+}
+
+export type FileItem = {
+    name: string,
+    image: string,
+    link: string
 }

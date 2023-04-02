@@ -3,7 +3,7 @@ import { UserContext } from '../Services/UserContext';
 import { getWeather, patchLocations } from "../Services/ApiClient";
 import { DateTime } from 'luxon';
 import { LocationSearch } from "./WeatherWidgetLocationSearch";
-import { WeatherWidgetElement } from "./WeatherWidgetElement";
+import { WeatherWidgetLocation } from "./WeatherWidgetElement";
 
 
 export const WeatherWidget = () => {
@@ -49,7 +49,7 @@ export const WeatherWidget = () => {
 
             {user.locations.map((location) => {
                 const weather = weatherArray.find(weather => weather.url === location.url);
-                return <WeatherWidgetElement key={location.url} location={location} timezone={weather?.timezone} currentWeather={weather?.currentWeather} currentTime={currentTime} deleteLocation={deleteLocation} />
+                return <WeatherWidgetLocation key={location.url} location={location} timezone={weather?.timezone} currentWeather={weather?.currentWeather} currentTime={currentTime} deleteLocation={deleteLocation} />
             })}
 
             <LocationSearch />
