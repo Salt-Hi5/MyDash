@@ -9,11 +9,16 @@ import { postGoogleAuthorisation } from "../Services/ApiClient";
 import axios from 'axios';
 import { GetThreads, GetThreadMessages, GetCalendarEvents, GetMessage } from "../Services/GoogleApi";
 import { Tokens, Threads, EmailObject, Header, CalendarObject } from "../Types/Types";
+import { ListWidget } from "./ListWidget";
+import { EmailViewWidget } from "./EmailViewWidget";
+import { EventViewWidget } from "./EventViewWidget";
+
 
 
 
 export const MainPage = () => {
-    const { user, nickname, setNickname } = useContext(UserContext);
+
+    const { user, nickname, setNickname, activeDetailView, setActiveDetailView, selectedEmail, selectedEvent } = useContext(UserContext);
     const [ tokens, setTokens ] = useState<Tokens>({} as Tokens);
     const [ threads, setThreads ] = useState<Threads>();
     const [ emails, setEmails ] = useState<EmailObject[]>([]);
@@ -100,6 +105,7 @@ export const MainPage = () => {
 
 
 
+
     const googleLogin = useGoogleLogin({
         onSuccess: async (whatever: CodeResponse) => {
             console.log("Authorised scope: " + whatever.scope);
@@ -118,28 +124,42 @@ export const MainPage = () => {
     const getEmails = async () => {
         const listOfThreads = await GetThreads(tokens, user.email)
         setThreads(listOfThreads);
+
+
+    useEffect(() => {
+        // Just to rerender the page when activeDetailView is updated
+    }, [activeDetailView]);
+
+    const renderDetailView = () => {
+        switch (activeDetailView) {
+            case "Email": return <EmailViewWidget />
+            case "Event": return <EventViewWidget />
+        }
     }
 
     return (
-        <main id="Main" className="absolute inset-0 overflow-auto overscroll-none bg-cover bg-fixed flex" style={{ backgroundImage: `url(${"./Waterfall.jpeg"}` }}>
+        <main id="Main" className="inset-0 absolute overflow-auto overscroll-none bg-cover bg-fixed flex" style={{ backgroundImage: `url(${"./Waterfall.jpeg"}` }}>
 
-            <section id="LeftWidgetColumn" className="flex w-1/4 p-4 bg-indigo-500 flex-wrap overflow-hidden">
-                {calendarEvents.map(event => {
-                    return <div>
-                        <p>{event.htmlLink}</p>
-                        <p>{event.summary}</p>
-                        <p>{event.start.dateTime}</p>
-                        <p>{event.start.timeZone}</p>
-                    </div>
-                })}
+
+            <section id="LeftWidgetColumn" className="w-1/4 h-full p-4 pt-5
+                                                      flex flex-col justify-between gap-4">
+                <ListWidget contentType="Emails"/>
+                <ListWidget contentType="Events"/>
+                <ListWidget contentType="Files"/>
+
             </section>
 
-            <section id="CenterWidgetColumn" className="grow flex flex-col items-center">
+            <section id="CenterWidgetColumn" className="w-1/2 grow flex flex-col items-center">
                 <h1 className="opacity-90 rounded-3xl my-20 text-4xl font-extraligh text-white p-1 px-4 shadow-md shadow-black">Welcome {nickname}</h1>
                 <SearchWidget />
+                <article className={`w-4/5 mt-20`}>
+                {
+                    renderDetailView()
+                }
+                </article>
             </section>
 
-            <section id="RightWidgetColumn" className="flex flex-col gap-4 w-1/4 overflow-auto overscroll-contain p-4">
+            <section id="RightWidgetColumn" className="w-1/4 flex flex-col gap-4 overflow-auto overscroll-contain p-4">
 
                 <UserMenu />
                 <WeatherWidget />
