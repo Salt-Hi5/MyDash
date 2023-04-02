@@ -36,7 +36,7 @@ public class GoogleAPI
 
         _tokenVerificationUrl = "https://oauth2.googleapis.com/token";
         _redirectUri = "https://mydashapi.azurewebsites.net/";
-        _redirectUri = "https://localhost:7037";
+        //_redirectUri = "https://localhost:7037";
     
         //_url = $"https://www.googleapis.com/calendar/v3/calendars/{_calendarId}/events/";
     }
