@@ -9,16 +9,15 @@ import { FileItem } from "../Types/Types";
 export const ListWidgetFile = (props: {fileItem: FileItem}) => {
 
     /*
+    const documentUrl = "https://docs.google.com/document/d/{fileId}/edit"
+    const spreadsheetUrl = "https://docs.google.com/spreadsheets/d/{fileId}/edit"
+    const presentationUrl = "https://docs.google.com/presentation/d/{fileId}/edit"
     
-    https://docs.google.com/document/d/1FC2X7trXIPpLht0HESSbT2BvM_OhF9UGBa9zUscFfvc/edit
+    the mimeType contains the type of file after the last period.
+    url + {type} + /d/ + {fileId} + /edit
 
-    https://docs.google.com/document/d/1FC2X7trXIPpLht0HESSbT2BvM_OhF9UGBa9zUscFfvc/edit
-    https://docs.google.com/presentation/d/1IPSnZMdXGhUqSYnAM6V-Zt2Y55zQ1iJz_Cny5_keqaE/edit#slide=id.p
-    https://docs.google.com/spreadsheets/d/1JIVXJ91GPgGv2bWhG0WIUzRbj_qXnx6lHCyYbrnxR8Y/edit#gid=0
-
-        ASSUMPTION: The link to the file is: 
-    
     */
+   const url = "https://docs.google.com/";
 
 
     return <article id="ListWidgetFile"       
