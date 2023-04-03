@@ -1,5 +1,5 @@
 import { UserContext } from '../Services/UserContext';
-import { CalendarItem, EmailItem, EmailObject, FileItem, User, Weather, CalendarObject } from "../Types/Types";
+import { EmailObject, FileItem, User, Weather, CalendarObject } from "../Types/Types";
 import { MainPage } from './MainPage';
 import { LoginPage } from './LoginPage';
 import { useEffect, useState } from 'react';

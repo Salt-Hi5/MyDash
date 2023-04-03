@@ -3,7 +3,7 @@ import { UserContext } from '../Services/UserContext';
 import { getWeather, patchLocations } from "../Services/ApiClient";
 import { DateTime } from 'luxon';
 import { LocationSearch } from "./WeatherWidgetLocationSearch";
-import { EmailItem } from "../Types/Types";
+import { } from "../Types/Types";
 import { ListWidgetEmail } from "./ListWidgetEmail";
 
 

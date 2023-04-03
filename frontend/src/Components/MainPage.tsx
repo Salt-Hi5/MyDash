@@ -7,7 +7,7 @@ import { UserMenu } from "./UserMenu";
 import { CodeResponse, useGoogleLogin } from "@react-oauth/google";
 import { postGoogleAuthorisation } from "../Services/ApiClient";
 import axios from 'axios';
-import { GetThreads, GetThreadMessages, GetCalendarEvents, GetMessage } from "../Services/GoogleApi";
+import { GetThreads, GetThreadMessages, GetCalendarEvents, GetMessage, GetDriveFiles } from "../Services/GoogleApi";
 import { Tokens, Threads, EmailObject, Header, CalendarObject } from "../Types/Types";
 import { ListWidget } from "./ListWidget";
 import { EmailViewWidget } from "./EmailViewWidget";
@@ -19,11 +19,9 @@ import { DateTime } from "luxon";
 
 export const MainPage = () => {
 
-    const { user, nickname, setNickname, activeDetailView, setEmailArray, setEventArray, emailArray } = useContext(UserContext);
+    const { user, nickname, setNickname, activeDetailView, setEmailArray, setEventArray, emailArray, setFileArray } = useContext(UserContext);
     const [tokens, setTokens] = useState<Tokens>({} as Tokens);
     const [threads, setThreads] = useState<Threads>();
-    const [emails, setEmails] = useState<EmailObject[]>([]);
-    const [calendarEvents, setCalendarEvents] = useState<CalendarObject[]>([]);
 
 
     // 🔥🔥🔥 CHANGE THIS URL TO MAKE IT WORK ON THE DEPLOYED VERSION. http://localhost:3001/auth/google backend that will exchange the code
@@ -36,17 +34,17 @@ export const MainPage = () => {
     }, [])
 
     useEffect(() => {
-        // setEmailArray(emails);
-        setEventArray(calendarEvents);
-    }, [ calendarEvents])
-
-    useEffect(() => {
         if (typeof(tokens.access_token) !== 'undefined') {
             getEmails();
 
             GetCalendarEvents(tokens, user.email).then(events => {
                 const items: CalendarObject[] = events.items;
-                setCalendarEvents(items);
+                setEventArray(items);
+            });
+
+            GetDriveFiles(tokens).then(filesResponse => {
+                setFileArray(filesResponse.files)
+                console.log(filesResponse)
             });
         }
     }, [tokens])
@@ -57,7 +55,6 @@ export const MainPage = () => {
         if (typeof(threads?.threads) !== "undefined") {
             let emailList: EmailObject[] = [];
             threads.threads.forEach(thread => { // For each thread 
-                console.log(thread);
                 GetThreadMessages(tokens, thread.id, user.email) // get the messages..
                     .then(newThread => {
                         GetMessage(tokens, newThread.messages[0].id, user.email) // Get a single email from the thread 
@@ -77,9 +74,8 @@ export const MainPage = () => {
                                     // https://mail.google.com/mail/u/john.forsgren@appliedtechnology.se/#inbox/1866ef55b8dd710e
 
                                 } as EmailObject;
-                                console.log("current email: ", email)
+
                                 emailList.push(email);
-                                console.log(emailList);
                                 // Add the new email to an list email object so it can be displayed. 
                                 
                             })
@@ -105,12 +101,11 @@ export const MainPage = () => {
 
         },
         flow: 'auth-code',
-        scope: "https://mail.google.com/ https://www.googleapis.com/auth/calendar"
+        scope: "https://mail.google.com/ https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/drive"
     });
 
     const getEmails = async () => {
         const listOfThreads = await GetThreads(tokens, user.email)
-        console.log(listOfThreads);
         setThreads(listOfThreads);
     }
 
@@ -133,7 +128,7 @@ export const MainPage = () => {
                                                       flex flex-col justify-between gap-4">
                 <ListWidget contentType="Emails" />
                 <ListWidget contentType="Events" />
-                {/* <ListWidget contentType="Files" /> */}
+                <ListWidget contentType="Files" />
 
             </section>
 

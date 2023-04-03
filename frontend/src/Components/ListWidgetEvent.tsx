@@ -3,7 +3,7 @@ import { UserContext } from '../Services/UserContext';
 import { getWeather, patchLocations } from "../Services/ApiClient";
 import { DateTime } from 'luxon';
 import { LocationSearch } from "./WeatherWidgetLocationSearch";
-import { CalendarItem, CalendarObject, EmailItem } from "../Types/Types";
+import { CalendarObject } from "../Types/Types";
 
 
 export const ListWidgetEvent = (props: {event: CalendarObject}) => {
