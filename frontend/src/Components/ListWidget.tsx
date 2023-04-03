@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from '../Services/UserContext';
 import { DateTime } from 'luxon';
-import { CalendarItem, CalendarObject, EmailItem, EmailObject, FileItem,  } from "../Types/Types";
+import { CalendarObject, EmailObject, FileItem,  } from "../Types/Types";
 import { ListWidgetEmail } from "./ListWidgetEmail";
 import { ListWidgetEvent } from "./ListWidgetEvent";
 import { ListWidgetFile } from "./ListWidgetFile";

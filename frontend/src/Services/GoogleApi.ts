@@ -58,3 +58,16 @@ export const GetCalendarEvents = async (tokens: Tokens, email: string) => {
 
     return calendarsResponse;
 }
+
+export const GetDriveFiles = async (tokens: Tokens) => {
+
+    const apiUrl = `https://www.googleapis.com/drive/v3/files?pageSize=10`;
+    
+    const driveResponse = await fetch(apiUrl, {
+        headers: {
+            Authorization: `Bearer ${tokens.access_token}`
+        },
+    }).then(response => response.json())
+
+    return driveResponse;
+}

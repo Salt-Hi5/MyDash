@@ -3,7 +3,7 @@ import { UserContext } from '../Services/UserContext';
 import { getWeather, patchLocations } from "../Services/ApiClient";
 import { DateTime } from 'luxon';
 import { LocationSearch } from "./WeatherWidgetLocationSearch";
-import { EmailItem, EmailObject } from "../Types/Types";
+import { EmailObject } from "../Types/Types";
 
 
 export const ListWidgetEmail = (props: {email: EmailObject}) => {

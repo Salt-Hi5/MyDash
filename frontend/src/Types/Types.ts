@@ -121,6 +121,10 @@ export type Events = {
     items: string
 }
 
+export type File = {
+
+}
+
 
 
 
@@ -145,26 +149,10 @@ token_type
 "Bearer"
 */
 
-export type EmailItem = {
-    subject: string,
-    from: string,
-    to: string,
-    received: string,
-    body: string
-}
-
-export type CalendarItem = {
-    name: string,
-    startTime: DateTime,
-    endTime: DateTime,
-    location: string,
-    details: string,
-    link: string
-}
 
 export type FileItem = {
-    name: string,
-    image: string,
-    link: string
+    mimeType: string,  // The type of file, e.g ".pdf" or ".doc"
+    id: string, 
+    name: string
 }
 
