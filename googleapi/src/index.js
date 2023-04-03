@@ -6,8 +6,6 @@ const {
 const cors = require('cors');
 
 const app = express();
-// process.env.CLIENT_ID = '134081916161-l7tpv46h6vbagicqho47o1l6ks220r4g.apps.googleusercontent.com';
-// process.env.CLIENT_SECRET = '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';
 
 app.use(cors());
 app.use(express.json());

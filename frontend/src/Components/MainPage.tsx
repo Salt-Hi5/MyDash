@@ -115,7 +115,7 @@ export const MainPage = () => {
                                                       flex flex-col justify-between gap-4">
                 <ListWidget contentType="Emails" />
                 <ListWidget contentType="Events" />
-                <ListWidget contentType="Files" />
+                {/* <ListWidget contentType="Files" /> */}
 
             </section>
 
