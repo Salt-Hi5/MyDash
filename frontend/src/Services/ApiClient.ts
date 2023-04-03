@@ -2,7 +2,7 @@ import { User, UserLocation, WeatherResponse } from "../Types/Types";
 import { getIP } from "./GeoLocation";
 var apiUrl = "https://mydashdotnetapi.azurewebsites.net/api";
 const apiTestUrl = "https://localhost:7037/api";   // Used for testing, since the deployed apiUrl doesn't work when building the app.  
-//apiUrl = apiTestUrl;
+apiUrl = apiTestUrl;
 
 /* DOCUMENT PURPOSE: 
     * Manage all web calls for the front end. 

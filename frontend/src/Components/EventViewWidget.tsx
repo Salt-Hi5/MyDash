@@ -16,6 +16,15 @@ export const EventViewWidget = () => {
         setActiveDetailView("");
     }
 
+    const showMeetsButton = () => {
+        if (typeof (selectedEvent.hangoutLink) !== "undefined") {
+            return <button onClick={(e) => window.open(selectedEvent.hangoutLink, '_blank', 'noreferrer')}
+                className="rounded-full h-10 px-3
+                    bg-white text-md font-light">Google Meets
+            </button>
+        }
+    }
+
     return (
         <section id="EventViewWidget"
             className=" w-full opacity-90 
@@ -32,10 +41,14 @@ export const EventViewWidget = () => {
                                 bg-white text-2xl font-light">x
                 </button>
 
-                <button onClick={(e) => window.open(selectedEvent.htmlLink, '_blank', 'noreferrer')} 
-                    className="rounded-full h-10 px-3
-                                bg-white text-md font-light">Google Meets
-                </button>
+                <div className="flex gap-4">
+                    {showMeetsButton()}
+                    <button onClick={(e) => window.open(selectedEvent.htmlLink, '_blank', 'noreferrer')}
+                        className="rounded-full h-10 px-3
+                                bg-white text-md font-light">Show in Calendar
+                    </button>
+                </div>
+
             </div>
 
             <div id="EventViewWidget--Body"
@@ -46,12 +59,12 @@ export const EventViewWidget = () => {
                 <span className="truncate text-3xl">{selectedEvent.summary}</span>
                 <div className="flex flex-col pt-4">
 
-                        <span className="truncate text-lg "><b>Time:</b> {startTime.weekdayLong} {startTime.toLocaleString(DateTime.TIME_24_SIMPLE)} – {endTime.weekdayLong} {endTime.toLocaleString(DateTime.TIME_24_SIMPLE)}</span>
-                        <span className="truncate text-lg "><b>Location:</b> {selectedEvent.location}</span>
-                    
+                    <span className="truncate text-lg "><b>Time:</b> {startTime.weekdayLong} {startTime.toLocaleString(DateTime.TIME_24_SIMPLE)} – {endTime.weekdayLong} {endTime.toLocaleString(DateTime.TIME_24_SIMPLE)}</span>
+                    <span className="truncate text-lg "><b>Location:</b> {selectedEvent.location}</span>
+
                 </div>
                 <hr className="mt-10 border-t border-slate-300" />
-                <span className="mt-10">{selectedEvent.summary}</span>
+                <span className="mt-10">{selectedEvent.description}</span>
             </div>
 
         </section>

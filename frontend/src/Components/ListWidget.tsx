@@ -26,7 +26,7 @@ export const ListWidget = (props: {contentType: string}) => {
                                 bg-slate-500 text-black
                                 shadow-md shadow-black`} >
 
-                    { emailArray.map(email => <ListWidgetEmail email={email as EmailObject} />) }  
+                    { emailArray.map(email => <ListWidgetEmail key={email.emailURL} email={email as EmailObject} />) }  
                 </section>
 
             case "Events": 
@@ -36,7 +36,7 @@ export const ListWidget = (props: {contentType: string}) => {
                                 bg-red-800 text-black
                                 shadow-md shadow-black`} >
                     
-                    { calendarArray.map(event => <ListWidgetEvent event={event as CalendarObject} />) }
+                    { calendarArray.map(event => <ListWidgetEvent key={event.htmlLink} event={event as CalendarObject} />) }
                 </section>
 
             case "Files": 

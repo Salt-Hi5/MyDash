@@ -104,10 +104,12 @@ export type Header = {
 
 export type CalendarObject = {
     summary: string, 
+    description: string,
     start: TimeAndTimeZone, 
     htmlLink : string,
     end: TimeAndTimeZone,
     location: string,
+    hangoutLink: string
 }
 
 export type TimeAndTimeZone = {

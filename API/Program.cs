@@ -10,14 +10,14 @@ builder.Configuration
     reloadOnChange: true
 );
 
-// builder.Services.AddCors(options =>
-//     options.AddPolicy("CorsPolicy",
-//         builder => builder
-//             .AllowAnyMethod()
-//             .AllowAnyOrigin()
-//             .AllowAnyHeader()
-//     )
-// );
+builder.Services.AddCors(options =>
+    options.AddPolicy("CorsPolicy",
+        builder => builder
+            .AllowAnyMethod()
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+    )
+);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -28,7 +28,7 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-// app.UseCors("CorsPolicy");
+app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

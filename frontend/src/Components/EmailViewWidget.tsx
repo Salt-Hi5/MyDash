@@ -30,7 +30,7 @@ export const EmailViewWidget = () => {
                                 bg-white text-2xl font-light">x
                 </button>
 
-                <button onClick={(e) => {}} 
+                <button onClick={(e) => { window.open(selectedEmail.emailURL, '_blank', 'noreferrer')}} 
                     className="rounded-full h-10 px-3
                                 bg-white text-md font-light">Reply
                 </button>
