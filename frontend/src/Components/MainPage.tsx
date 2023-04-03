@@ -13,6 +13,7 @@ import { ListWidget } from "./ListWidget";
 import { EmailViewWidget } from "./EmailViewWidget";
 import { EventViewWidget } from "./EventViewWidget";
 import { DateTime } from "luxon";
+//import { SearchResultsWidget } from "./SearchResultsWidget";
 
 
 
@@ -36,7 +37,7 @@ export const MainPage = () => {
     }, [])
 
     useEffect(() => {
-        // setEmailArray(emails);
+        //setEmailArray(emails);
         setEventArray(calendarEvents);
     }, [ calendarEvents])
 
@@ -122,6 +123,7 @@ export const MainPage = () => {
         switch (activeDetailView) {
             case "Email": return <EmailViewWidget />
             case "Event": return <EventViewWidget />
+            //case "Search": return <SearchResultsWidget />
         }
     }
 

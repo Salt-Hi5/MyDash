@@ -12,9 +12,8 @@ export const ListWidget = (props: {contentType: string}) => {
     const { emailArray, eventArray: calendarArray, fileArray, setEmailArray, setEventArray, setFileArray } = useContext(UserContext);
 
     useEffect(() => {
-        console.log("Loading recent emails from API...");
 
-    }, [])
+    }, [emailArray, calendarArray])
 
     const renderWidgetItems = (contentType: string) => {
 

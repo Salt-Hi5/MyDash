@@ -10,7 +10,7 @@ https://gmail.googleapis.com/gmail/v1/users/example@gmail.com/labels
 */
 
 export const GetThreads = async (tokens: Tokens, email: string): Promise<Threads> => {
-    let apiUrl = `https://gmail.googleapis.com/gmail/v1/users/${email}/threads?maxResults=5`;
+    let apiUrl = `https://gmail.googleapis.com/gmail/v1/users/${email}/threads?maxResults=10`;
 
     const threadsResponse = await fetch(apiUrl, {
         headers: {

@@ -32,7 +32,7 @@ export const EmailViewWidget = () => {
 
                 <button onClick={(e) => { window.open(selectedEmail.emailURL, '_blank', 'noreferrer')}} 
                     className="rounded-full h-10 px-3
-                                bg-white text-md font-light">Reply
+                                bg-white text-md font-light">View in Gmail
                 </button>
             </div>
 
@@ -52,7 +52,7 @@ export const EmailViewWidget = () => {
                     
                 </div>
                 <hr className="mt-10 border-t border-slate-300" />
-                <span className="mt-10">{selectedEmail.snippet}</span>
+                <span className="mt-10" dangerouslySetInnerHTML={{__html: selectedEmail.snippet}} />
             </div>
 
         </section>

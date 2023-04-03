@@ -21,6 +21,8 @@ export const App = () => {
   const [selectedEvent, setSelectedEvent] = useState<CalendarObject>({} as CalendarObject);
   const [selectedFile, setSelectedFile] = useState<FileItem>({} as FileItem);
 
+  const [searchQuery, setSearchQuery] = useState("")
+
   const isLoggedIn = (): boolean => {
     return typeof (user.userIdHash) !== 'undefined';
   }
@@ -34,7 +36,8 @@ export const App = () => {
                                           activeDetailView, setActiveDetailView,
                                           selectedEmail, setSelectedEmail,
                                           selectedEvent, setSelectedEvent,
-                                          selectedFile, setSelectedFile
+                                          selectedFile, setSelectedFile,
+                                          searchQuery, setSearchQuery
   }}>
     {
       isLoggedIn() ? <MainPage /> : <LoginPage />
