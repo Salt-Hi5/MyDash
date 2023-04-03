@@ -24,6 +24,9 @@ interface UserContextValue {
     setSelectedEvent: Dispatch<SetStateAction<CalendarObject>>;
     selectedFile: FileItem;
     setSelectedFile: Dispatch<SetStateAction<FileItem>>;
+
+    searchQuery: string;
+    setSearchQuery: Dispatch<SetStateAction<string>>;
 }
 export const UserContext = createContext<UserContextValue>({
     user: {} as User,
@@ -48,4 +51,7 @@ export const UserContext = createContext<UserContextValue>({
     setSelectedEvent: () => { },
     selectedFile: {} as FileItem,
     setSelectedFile: () => { },
+
+    searchQuery: "",
+    setSearchQuery: () => { },
 });

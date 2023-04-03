@@ -13,6 +13,7 @@ import { ListWidget } from "./ListWidget";
 import { EmailViewWidget } from "./EmailViewWidget";
 import { EventViewWidget } from "./EventViewWidget";
 import { DateTime } from "luxon";
+//import { SearchResultsWidget } from "./SearchResultsWidget";
 
 
 
@@ -32,6 +33,10 @@ export const MainPage = () => {
         setNickname(user.nickname);
         googleLogin();
     }, [])
+
+    useEffect(() => {
+        setEventArray(calendarEvents);
+    }, [ calendarEvents])
 
     useEffect(() => {
         if (typeof(tokens.access_token) !== 'undefined') {
@@ -117,6 +122,7 @@ export const MainPage = () => {
         switch (activeDetailView) {
             case "Email": return <EmailViewWidget />
             case "Event": return <EventViewWidget />
+            //case "Search": return <SearchResultsWidget />
         }
     }
 
