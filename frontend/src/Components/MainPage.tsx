@@ -27,7 +27,7 @@ export const MainPage = () => {
 
 
     // 🔥🔥🔥 CHANGE THIS URL TO MAKE IT WORK ON THE DEPLOYED VERSION. http://localhost:3001/auth/google backend that will exchange the code
-    let apiUrl = "http://mydashgoogleapi.azurewebsites.net/auth/google";
+    let apiUrl = "https://mydashgoogleapi.azurewebsites.net/auth/google";
     //apiUrl = "http://localhost:3001/auth/google"; // DEBUG 
 
     useEffect(() => {
