@@ -27,7 +27,7 @@ export const MainPage = () => {
 
 
     // 🔥🔥🔥 CHANGE THIS URL TO MAKE IT WORK ON THE DEPLOYED VERSION. http://localhost:3001/auth/google backend that will exchange the code
-    let apiUrl = "mydashgoogleapi.azurewebsites.net/auth/google";
+    let apiUrl = "http://mydashgoogleapi.azurewebsites.net/auth/google";
     //apiUrl = "http://localhost:3001/auth/google"; // DEBUG 
 
     useEffect(() => {
@@ -88,7 +88,7 @@ export const MainPage = () => {
         onSuccess: async (whatever: CodeResponse) => {
             console.log("Authorised scope: " + whatever.scope);
             const code = whatever.code;
-            const response = await axios.post(apiUrl, {
+            await axios.post(apiUrl, {
                 code
             }).then(response => {
                 setTokens(response.data);

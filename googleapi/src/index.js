@@ -7,7 +7,11 @@ const cors = require('cors');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  header: 'Access-Control-Allow-Origin: *',
+  header: 'Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS',
+  header: 'Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token'
+}));
 app.use(express.json());
 
 const oAuth2Client = new OAuth2Client(
