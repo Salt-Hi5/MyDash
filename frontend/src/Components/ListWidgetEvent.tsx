@@ -24,7 +24,7 @@ export const ListWidgetEvent = (props: {event: CalendarObject}) => {
                     grow flex flex-col gap-1 
                     bg-white text-black border-slate-900
                     shadow-md shadow-black
-                    hover:bg-sky-100 hover:cursor-pointer`
+                    hover:bg-red-100 hover:cursor-pointer`
         } >
 
         

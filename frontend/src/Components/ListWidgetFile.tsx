@@ -17,25 +17,46 @@ export const ListWidgetFile = (props: {fileItem: FileItem}) => {
     url + {type} + /d/ + {fileId} + /edit
 
     */
-   const url = "https://docs.google.com/";
+    const url = "https://docs.google.com";
+    const mimetypeArray = /[^.]*$/.exec(props.fileItem.mimeType);
+    const mimetype = mimetypeArray ? mimetypeArray[0] : "other";
 
+    const getImage = () => {
+        switch (mimetype) {
+            case "document": return "./Docs.png";
+            case "spreadsheets": return "./Sheets.png";
+            case "presentation": return "./Slides.png";
+            default: return "./Drive.png";
+        }
+    }
+
+    
+    const getLink = () => {
+        return `${url}/${mimetype}/d/${props.fileItem.id}/edit`;
+    }
 
     return <article id="ListWidgetFile"       
         onClick={
-            (e) => window.open(props.fileItem.mimeType, '_blank', 'noreferrer')
+            (e) => window.open(getLink(), '_blank', 'noreferrer')
         } 
-        className={`flex flex-col gap-1 justify-between
-        opacity-90 rounded-3xl w-24 h-28
-        hover:cursor-pointer hover:bg-sky-100`
+        className={`flex flex-col gap-1 p-2 pt-4
+                    hover:cursor-pointer w-40 h-40 shrink-0
+                    shadow-md shadow-black
+                    rounded-3xl bg-white/70  hover:bg-emerald-100/70
+                    `
     } >
         
-        {/* <img src={props.fileItem.image} alt=""  
-            className={`opacity-90 rounded-3xl 
-                        bg-white shadow-md shadow-black`
-        }/> */}
-        <span className="truncate text-s text-black
-                         
-        ">{props.fileItem.name}</span>
+
+
+        <img src={getImage()} alt=""  
+            className={`object-scale-down w-20 self-center
+                        
+                        `
+        }/> 
+
+        <span className={`opacity-90 rounded-3xl px-4 text-center h-12 overflow-y-hidden
+                     text-s text-black
+                          `}>{props.fileItem.name}</span>
 
     </article>
 }

@@ -1,5 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-import { User, Weather, EmailItem, CalendarItem, FileItem, EmailObject, CalendarObject } from "../Types/Types";
+import { User, Weather, FileItem, EmailObject, CalendarObject } from "../Types/Types";
 
 interface UserContextValue {
     user: User;
