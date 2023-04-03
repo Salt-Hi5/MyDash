@@ -45,14 +45,14 @@ export const EmailViewWidget = () => {
                 <div className="flex justify-between pt-4">
 
                     <div className="flex flex-col">
-                        <span className="truncate text-lg "><b>From: </b>{selectedEmail.from}</span>
-                        <span className="truncate text-lg "><b>To: </b>{selectedEmail.to}</span>
+                        <span className="truncate text-lg "><b>From: </b>{selectedEmail.sender}</span>
+                        <span className="truncate text-lg "><b>To: </b>{selectedEmail.recipient}</span>
                     </div>
-                    <span className="shrink-0 ml-5 mt-1">Received {selectedEmail.received.toLowerCase()}</span>
+                    <span className="shrink-0 ml-5 mt-1">Received {selectedEmail.date.weekdayLong} {selectedEmail.date.toLocaleString(DateTime.TIME_24_SIMPLE)}</span>
                     
                 </div>
                 <hr className="mt-10 border-t border-slate-300" />
-                <span className="mt-10">{selectedEmail.body}</span>
+                <span className="mt-10">{selectedEmail.snippet}</span>
             </div>
 
         </section>

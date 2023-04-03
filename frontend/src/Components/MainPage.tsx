@@ -12,13 +12,14 @@ import { Tokens, Threads, EmailObject, Header, CalendarObject } from "../Types/T
 import { ListWidget } from "./ListWidget";
 import { EmailViewWidget } from "./EmailViewWidget";
 import { EventViewWidget } from "./EventViewWidget";
+import { DateTime } from "luxon";
 
 
 
 
 export const MainPage = () => {
 
-    const { user, nickname, setNickname, activeDetailView, setActiveDetailView, selectedEmail, selectedEvent } = useContext(UserContext);
+    const { user, nickname, setNickname, activeDetailView, setEmailArray, setEventArray } = useContext(UserContext);
     const [tokens, setTokens] = useState<Tokens>({} as Tokens);
     const [threads, setThreads] = useState<Threads>();
     const [emails, setEmails] = useState<EmailObject[]>([]);
@@ -33,6 +34,11 @@ export const MainPage = () => {
         setNickname(user.nickname);
         googleLogin();
     }, [])
+
+    useEffect(() => {
+        setEmailArray(emails);
+        setEventArray(calendarEvents);
+    }, [emails, calendarEvents])
 
     useEffect(() => {
         if (typeof(tokens.access_token) !== 'undefined') {
@@ -54,15 +60,17 @@ export const MainPage = () => {
                     .then(newThread => {
                         GetMessage(tokens, newThread.messages[0].id, user.email) // Get a single email from the thread 
                             .then(message => {
+                                console.log(message)
                                 const headers: Header[] = message.payload.headers;
+                                console.log(headers.find(x => x.name === "Date")!.value);
                                 setEmails([...emails, // Add the new email to an list email object so it can be displayed. 
                                 {
-                                    date: headers.find(x => x.name === "Date")!.value,
+                                    date: DateTime.fromRFC2822(headers.find(x => x.name === "Date")!.value),
                                     subject: headers.find(x => x.name === "Subject")!.value,
                                     sender: headers.find(x => x.name === "From")!.value,    // 🔥 CONCATINATE TO EXCLUDE USERNAME sender: '"Björn Noctiluca" <bjorn.noctiluca@appliedtechnology.se>' 
                                     // ALTERNATIVE WAY: Just extacts the username and not email (but this does NOT WORK for all emails since they have different structures) (headers.find(header => header.name === 'From')?.value.match(/"([^"]*)"/)?.[1] || ''),
-
-
+                                    recipient: headers.find(x => x.name === "Delivered-To")!.value,
+                                    snippet: message.snippet,
                                     emailURL: `https://mail.google.com/mail/u/${user.email}/#inbox/${thread.id}`,
 
                                     // EXAMPLE of Email URL that sends the user to a specific email based on the emails code

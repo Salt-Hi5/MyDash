@@ -87,11 +87,13 @@ export type MessagePartBody = {
 
 
 export type EmailObject = {
-    date: string
+    date: DateTime
     subject: string // 
     sender: string 
     emailURL: string // The link to the email. 
     content: string // 🔥🔥🔥 IDEALY: Include this (although we cant access it at this point)
+    recipient: string
+    snippet: string
 
 }
 
@@ -104,10 +106,12 @@ export type CalendarObject = {
     summary: string, 
     start: TimeAndTimeZone, 
     htmlLink : string,
+    end: TimeAndTimeZone,
+    location: string,
 }
 
 export type TimeAndTimeZone = {
-    dateTime: string, 
+    dateTime: DateTime, 
     timeZone: string, 
 }
 

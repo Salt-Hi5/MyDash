@@ -3,10 +3,10 @@ import { UserContext } from '../Services/UserContext';
 import { getWeather, patchLocations } from "../Services/ApiClient";
 import { DateTime } from 'luxon';
 import { LocationSearch } from "./WeatherWidgetLocationSearch";
-import { EmailItem } from "../Types/Types";
+import { EmailItem, EmailObject } from "../Types/Types";
 
 
-export const ListWidgetEmail = (props: {email: EmailItem}) => {
+export const ListWidgetEmail = (props: {email: EmailObject}) => {
     const { setSelectedEmail, setActiveDetailView } = useContext(UserContext);
 
     const selectEmail = () => {
@@ -29,10 +29,10 @@ export const ListWidgetEmail = (props: {email: EmailItem}) => {
                         flex justify-between">
 
             <span className="truncate text-xl">{props.email.subject}</span>
-            <span className="shrink-0 ml-5">{props.email.received}</span>
+            <span className="shrink-0 ml-5">{props.email.date.weekdayLong} {props.email.date.toLocaleString(DateTime.TIME_24_SIMPLE)}</span>
         </span>
-        <span className="truncate font-semibold">From: {props.email.from}</span>
-        <span className="truncate mt-4">{props.email.body}</span>
+        <span className="truncate font-semibold">From: {props.email.sender}</span>
+        <span className="truncate mt-4">{props.email.snippet}</span>
 
     </article>
 }

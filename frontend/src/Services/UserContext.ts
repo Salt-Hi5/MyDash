@@ -1,5 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-import { User, Weather, EmailItem, CalendarItem, FileItem } from "../Types/Types";
+import { User, Weather, EmailItem, CalendarItem, FileItem, EmailObject, CalendarObject } from "../Types/Types";
 
 interface UserContextValue {
     user: User;
@@ -9,19 +9,19 @@ interface UserContextValue {
 
     weatherArray: Weather[];
     setWeatherArray: Dispatch<SetStateAction<Weather[]>>;
-    emailArray: EmailItem[];
-    setEmailArray: Dispatch<SetStateAction<EmailItem[]>>;
-    eventArray: CalendarItem[];
-    setEventArray: Dispatch<SetStateAction<CalendarItem[]>>;
+    emailArray: EmailObject[];
+    setEmailArray: Dispatch<SetStateAction<EmailObject[]>>;
+    eventArray: CalendarObject[];
+    setEventArray: Dispatch<SetStateAction<CalendarObject[]>>;
     fileArray: FileItem[];
     setFileArray: Dispatch<SetStateAction<FileItem[]>>;
 
     activeDetailView: string;
     setActiveDetailView: Dispatch<SetStateAction<string>>;
-    selectedEmail: EmailItem;
-    setSelectedEmail: Dispatch<SetStateAction<EmailItem>>;
-    selectedEvent: CalendarItem;
-    setSelectedEvent: Dispatch<SetStateAction<CalendarItem>>;
+    selectedEmail: EmailObject;
+    setSelectedEmail: Dispatch<SetStateAction<EmailObject>>;
+    selectedEvent: CalendarObject;
+    setSelectedEvent: Dispatch<SetStateAction<CalendarObject>>;
     selectedFile: FileItem;
     setSelectedFile: Dispatch<SetStateAction<FileItem>>;
 }
@@ -42,9 +42,9 @@ export const UserContext = createContext<UserContextValue>({
 
     activeDetailView: {} as string,
     setActiveDetailView: () => { },
-    selectedEmail: {} as EmailItem,
+    selectedEmail: {} as EmailObject,
     setSelectedEmail: () => { },
-    selectedEvent: {} as CalendarItem,
+    selectedEvent: {} as CalendarObject,
     setSelectedEvent: () => { },
     selectedFile: {} as FileItem,
     setSelectedFile: () => { },

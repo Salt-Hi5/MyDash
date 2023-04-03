@@ -10,14 +10,14 @@ builder.Configuration
     reloadOnChange: true
 );
 
-builder.Services.AddCors(options =>
-    options.AddPolicy("CorsPolicy",
-        builder => builder
-            .AllowAnyMethod()
-            .AllowAnyOrigin()
-            .AllowAnyHeader()
-    )
-);
+// builder.Services.AddCors(options =>
+//     options.AddPolicy("CorsPolicy",
+//         builder => builder
+//             .AllowAnyMethod()
+//             .AllowAnyOrigin()
+//             .AllowAnyHeader()
+//     )
+// );
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -25,9 +25,17 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseCors(builder =>
+{
+    builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+});
+
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseCors("CorsPolicy");
+// app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

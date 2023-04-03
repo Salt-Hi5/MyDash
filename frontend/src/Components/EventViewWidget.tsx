@@ -9,6 +9,8 @@ import { ListWidgetEmail } from "./ListWidgetEmail";
 
 export const EventViewWidget = () => {
     const { selectedEvent, setActiveDetailView } = useContext(UserContext);
+    const startTime = DateTime.fromISO(selectedEvent.start.dateTime.toString());
+    const endTime = DateTime.fromISO(selectedEvent.end.dateTime.toString());
 
     const cancel = () => {
         setActiveDetailView("");
@@ -30,7 +32,7 @@ export const EventViewWidget = () => {
                                 bg-white text-2xl font-light">x
                 </button>
 
-                <button onClick={(e) => window.open(selectedEvent.link, '_blank', 'noreferrer')} 
+                <button onClick={(e) => window.open(selectedEvent.htmlLink, '_blank', 'noreferrer')} 
                     className="rounded-full h-10 px-3
                                 bg-white text-md font-light">Google Meets
                 </button>
@@ -41,15 +43,15 @@ export const EventViewWidget = () => {
                             flex flex-col 
                             bg-white text-black">
 
-                <span className="truncate text-3xl">{selectedEvent.name}</span>
+                <span className="truncate text-3xl">{selectedEvent.summary}</span>
                 <div className="flex flex-col pt-4">
 
-                        <span className="truncate text-lg "><b>Time:</b> {selectedEvent.startTime.weekdayLong} {selectedEvent.startTime.toLocaleString(DateTime.TIME_24_SIMPLE)} – {selectedEvent.endTime.weekdayLong} {selectedEvent.endTime.toLocaleString(DateTime.TIME_24_SIMPLE)}</span>
+                        <span className="truncate text-lg "><b>Time:</b> {startTime.weekdayLong} {startTime.toLocaleString(DateTime.TIME_24_SIMPLE)} – {endTime.weekdayLong} {endTime.toLocaleString(DateTime.TIME_24_SIMPLE)}</span>
                         <span className="truncate text-lg "><b>Location:</b> {selectedEvent.location}</span>
                     
                 </div>
                 <hr className="mt-10 border-t border-slate-300" />
-                <span className="mt-10">{selectedEvent.details}</span>
+                <span className="mt-10">{selectedEvent.summary}</span>
             </div>
 
         </section>

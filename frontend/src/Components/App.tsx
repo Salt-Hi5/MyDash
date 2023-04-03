@@ -1,5 +1,5 @@
 import { UserContext } from '../Services/UserContext';
-import { CalendarItem, EmailItem, FileItem, User, Weather } from "../Types/Types";
+import { CalendarItem, EmailItem, EmailObject, FileItem, User, Weather, CalendarObject } from "../Types/Types";
 import { MainPage } from './MainPage';
 import { LoginPage } from './LoginPage';
 import { useEffect, useState } from 'react';
@@ -12,13 +12,13 @@ export const App = () => {
   const [nickname, setNickname] = useState("");
 
   const [weatherArray, setWeatherArray] = useState<Weather[]>([]);
-  const [emailArray, setEmailArray] = useState<EmailItem[]>([]);
-  const [eventArray, setEventArray] = useState<CalendarItem[]>([]);
+  const [emailArray, setEmailArray] = useState<EmailObject[]>([]);
+  const [eventArray, setEventArray] = useState<CalendarObject[]>([]);
   const [fileArray, setFileArray] = useState<FileItem[]>([]);
   
   const [activeDetailView, setActiveDetailView] = useState<string>("");
-  const [selectedEmail, setSelectedEmail] = useState<EmailItem>({} as EmailItem);
-  const [selectedEvent, setSelectedEvent] = useState<CalendarItem>({} as CalendarItem);
+  const [selectedEmail, setSelectedEmail] = useState<EmailObject>({} as EmailObject);
+  const [selectedEvent, setSelectedEvent] = useState<CalendarObject>({} as CalendarObject);
   const [selectedFile, setSelectedFile] = useState<FileItem>({} as FileItem);
 
   const isLoggedIn = (): boolean => {
