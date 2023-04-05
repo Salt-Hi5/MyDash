@@ -19,7 +19,7 @@ The application's frontend is written in TypeScript using React. It has a primar
 
 • Widgets for Google Drive, Google Calendar and Gmail, as well as weather and time.
 
-• Ability to join remote meetings in Google Meets right from the app, and to go to Gmail and Google Calendar for more information.
+• Ability to join remote meetings in Google Meets right from the app, and to view an email or appointment in Gmail and Google Calendar.
 
 • Current time and weather for the location where you first logged into MyDash is automatically displayed.
 
