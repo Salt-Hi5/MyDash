@@ -1,4 +1,5 @@
 # MyDash
+
 ### Your Personalized Google Dashboard
 
 MyDash is a full-stack web application built by the mob Hi5 as our final project during the 13-week bootcamp at [**`</salt>`** (School of Applied Technology)](https://www.linkedin.com/company/applied-technology-stockholm/mycompany/). MyDash gives the user an overview of all their Google services, with the ability to see their emails, calendar appointments and recent files in Google Drive.
