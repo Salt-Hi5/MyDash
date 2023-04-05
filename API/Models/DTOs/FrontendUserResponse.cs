@@ -1,9 +1,6 @@
 
 namespace API.Models;
 
-/*
-This is a DTO class used whenever a client asks for a user in the database. 
-*/
 public class FrontendUserResponse
 {
     public string? UserIdHash { get; set; }
@@ -14,10 +11,10 @@ public class FrontendUserResponse
     public string? Email { get; set; }
 
     public FrontendUserResponse() { }
-    public FrontendUserResponse(User user) // Run every time someone requests a user. Extracts from the database the User with its Location. 
+    public FrontendUserResponse(User user) 
     {
         UserIdHash = user.UserIdHash;
-        Locations = user.Locations.Select(location =>  // Creates and saves an object for the user's Locations. 
+        Locations = user.Locations.Select(location =>   
             new FrontendLocationResponse()
             {
                 Name = location.Name,

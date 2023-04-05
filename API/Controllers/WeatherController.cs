@@ -15,7 +15,7 @@ public class WeatherController : ControllerBase
     }
 
     [HttpGet("{userHash}")]
-    public ActionResult<FrontendWeatherResponse> GetWeather(string userHash) // Gets the weather for all locations that the current user (inside the argment) has. 
+    public ActionResult<FrontendWeatherResponse> GetWeather(string userHash)
     {
         var userFound = _context.UserExists(userHash, out var user);
         if (!userFound) return NotFound();

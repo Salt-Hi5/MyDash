@@ -4,70 +4,70 @@ namespace API.Models;
 
 public class WeatherApiWeather
 {
-    [JsonPropertyName("last_updated_epoch")]                        //: 1679614200,
+    [JsonPropertyName("last_updated_epoch")]                      
     public int? LastUpdatedEpoch { get; set; }
 
-    [JsonPropertyName("last_updated")]                              //: "2023-03-23 23:30",
+    [JsonPropertyName("last_updated")]                            
     public string? LastUpdated { get; set; }
 
-    [JsonPropertyName("temp_c")]                                    //: 10.0,
+    [JsonPropertyName("temp_c")]                                 
     public double? Temperature { get; set; }
 
-    [JsonPropertyName("temp_f")]                                    //: 50.0,
+    [JsonPropertyName("temp_f")]                                  
     public double? TemperatureFahrenheit { get; set; }
 
-    [JsonPropertyName("is_day")]                                    //: 0,
+    [JsonPropertyName("is_day")]                                   
     public int? IsDay { get; set; }
 
-    [JsonPropertyName("condition")]                                 // : {"text": "Overcast", "icon": "//cdn.weatherapi.com/weather/64x64/night/122.png", "code": 1009}
+    [JsonPropertyName("condition")]                                
     public WeatherApiWeatherCondition? Condition { get; set; }
 
-    [JsonPropertyName("wind_mph")]                                  //: 13.6,
+    [JsonPropertyName("wind_mph")]                                 
     public double? WindMilesPerHour { get; set; }
 
-    [JsonPropertyName("wind_kph")]                                  //: 22.0,
+    [JsonPropertyName("wind_kph")]                                 
     public double? WindKilometersPerHour { get; set; }
 
-    [JsonPropertyName("wind_degree")]                               //: 230,
+    [JsonPropertyName("wind_degree")]                               
     public int? WindDegree { get; set; }
 
-    [JsonPropertyName("wind_dir")]                                  //: "SW",
+    [JsonPropertyName("wind_dir")]                                 
     public string? WindDirection { get; set; }
 
-    [JsonPropertyName("pressure_mb")]                               //: 994.0,
+    [JsonPropertyName("pressure_mb")]                              
     public double? PressureMillibar { get; set; }
 
-    [JsonPropertyName("pressure_in")]                               //: 29.35,
+    [JsonPropertyName("pressure_in")]                             
     public double? PressureInches { get; set; }
 
-    [JsonPropertyName("precip_mm")]                                 //: 0.5,
+    [JsonPropertyName("precip_mm")]                                
     public double? PrecipitationMillimeter { get; set; }
 
-    [JsonPropertyName("precip_in")]                                 //: 0.02,
+    [JsonPropertyName("precip_in")]                                
     public double? PrecipitationInches { get; set; }
 
-    [JsonPropertyName("humidity")]                                  //: 87,
+    [JsonPropertyName("humidity")]                                
     public int? Humidity { get; set; }
 
-    [JsonPropertyName("cloud")]                                     //: 100,
+    [JsonPropertyName("cloud")]                                    
     public int? Cloud { get; set; }
 
-    [JsonPropertyName("feelslike_c")]                               //: 7.3,
+    [JsonPropertyName("feelslike_c")]                              
     public double? FeelsLikeCelcius { get; set; }
 
-    [JsonPropertyName("feelslike_f")]                               //: 45.1,
+    [JsonPropertyName("feelslike_f")]                              
     public double? FeelsLikeFahrenheit { get; set; }
 
-    [JsonPropertyName("vis_km")]                                    //: 10.0,
+    [JsonPropertyName("vis_km")]                                   
     public double? VisibilityKilometers { get; set; }
 
-    [JsonPropertyName("vis_miles")]                                //: 6.0,
+    [JsonPropertyName("vis_miles")]                               
     public double? VisibilityMiles { get; set; }
 
-    [JsonPropertyName("uv")]                                       //: 1.0,
+    [JsonPropertyName("uv")]                                    
     public double? UV { get; set; }
 
-    [JsonPropertyName("gust_mph")]                                 //: 19.7,
+    [JsonPropertyName("gust_mph")]                               
     public double? GustMilesPerHour { get; set; }
 
 }

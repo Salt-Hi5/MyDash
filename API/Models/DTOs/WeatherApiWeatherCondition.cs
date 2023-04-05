@@ -7,7 +7,7 @@ public class WeatherApiWeatherCondition
     public string? Text { get; set; }
 
     [JsonPropertyName("icon")]
-    public string? Icon { get; set; } // Is a string-url to an icon that shows the current weather. 
+    public string? Icon { get; set; } 
 
     [JsonPropertyName("code")]
     public int? Code { get; set; }

@@ -1,11 +1,6 @@
 
 namespace API.Services;
 
-/*
-PURPOSE: 
-Used to hash ("encrypt") variables such as the userID
-*/
-
 public static class Hasher
 {
     private static byte[] GetHashArray(string inputString)

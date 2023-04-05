@@ -7,8 +7,8 @@ import { UserLocation } from "../Types/Types";
 
 export const LocationSearch = () => {
     const { user, setWeatherArray } = useContext(UserContext);
-    const [locationSearchTerm, setLocationSearchTerm] = useState<string>(""); // Used for the text input that the user writes when adding a new location. 
-    const [locationSearchResults, setLocationSearchResults] = useState<UserLocation[]>([]); // Used for the current available results from the backend for the current search. 
+    const [locationSearchTerm, setLocationSearchTerm] = useState<string>(""); 
+    const [locationSearchResults, setLocationSearchResults] = useState<UserLocation[]>([]);
     const [showLocationSearchResults, setShowLocationSearchResults] = useState(false);
 
     useEffect(() => {
@@ -46,7 +46,7 @@ export const LocationSearch = () => {
 
     return <div>
         <input id="AddLocation" className="w-full py-2 px-6 rounded-3xl opacity-90" type="text" value={locationSearchTerm} placeholder="Add Location" autoComplete="off"
-            onChange={(event) => setLocationSearchTerm(event.target.value)} // The search term is a state that is used so that the drop-down is continiously updated based on what the user writes in the search bar. 
+            onChange={(event) => setLocationSearchTerm(event.target.value)} 
             onKeyDown={handleKeyDown}
         />
         {

@@ -1,14 +1,5 @@
 import { Tokens, Threads, Thread } from "../Types/Types"
 
-// https://gmail.googleapis.com/gmail/v1/users/{userId}/labels  // <-- The address that we call the labels from. 
-
-/*
-
-For example, if you wanted to get the labels for the Gmail account associated with the email address "example@gmail.com", you would use the following URL:
-https://gmail.googleapis.com/gmail/v1/users/example@gmail.com/labels
-
-*/
-
 export const GetThreads = async (tokens: Tokens, email: string): Promise<Threads> => {
     let apiUrl = `https://gmail.googleapis.com/gmail/v1/users/${email}/threads?maxResults=10`;
 

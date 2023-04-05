@@ -25,18 +25,14 @@ export const MainPage = () => {
     const [threads, setThreads] = useState<Threads>();
 
 
-    // 🔥🔥🔥 CHANGE THIS URL TO MAKE IT WORK ON THE DEPLOYED VERSION. http://localhost:3001/auth/google backend that will exchange the code
+
     let apiUrl = "https://mydashgoogleapi.azurewebsites.net/auth/google";
-    apiUrl = "http://localhost:3001/auth/google"; // DEBUG 
+    // apiUrl = "http://localhost:3001/auth/google"; // DEBUG 
 
     useEffect(() => {
         setNickname(user.nickname);
         googleLogin();
     }, [])
-
-    // useEffect(() => {
-    //     setEventArray(calendarEvents);
-    // }, [ calendarEvents])
 
     useEffect(() => {
         if (typeof(tokens.access_token) !== 'undefined') {
@@ -59,29 +55,24 @@ export const MainPage = () => {
     useEffect(() => {
         if (typeof(threads?.threads) !== "undefined") {
             let emailList: EmailObject[] = [];
-            threads.threads.forEach(thread => { // For each thread 
-                GetThreadMessages(tokens, thread.id, user.email) // get the messages..
+            threads.threads.forEach(thread => { 
+                GetThreadMessages(tokens, thread.id, user.email) 
                     .then(newThread => {
-                        GetMessage(tokens, newThread.messages[0].id, user.email) // Get a single email from the thread 
+                        GetMessage(tokens, newThread.messages[0].id, user.email) 
                             .then(message => {
                                 const headers: Header[] = message.payload.headers;
                                 const email = {
                                     date: DateTime.fromRFC2822(headers.find(x => x.name === "Date")!.value),
                                     subject: headers.find(x => x.name === "Subject")?.value,
-                                    sender: headers.find(x => x.name === "From")?.value,    // 🔥 CONCATINATE TO EXCLUDE USERNAME sender: '"Björn Noctiluca" <bjorn.noctiluca@appliedtechnology.se>' 
-                                    // ALTERNATIVE WAY: Just extacts the username and not email (but this does NOT WORK for all emails since they have different structures) (headers.find(header => header.name === 'From')?.value.match(/"([^"]*)"/)?.[1] || ''),
+                                    sender: headers.find(x => x.name === "From")?.value,     
                                     recipient: headers.find(x => x.name === "Delivered-To")?.value ?? "You",
                                     snippet: message.snippet,
                                     emailURL: `https://mail.google.com/mail/u/${user.email}/#inbox/${thread.id}`,
 
-                                    // EXAMPLE of Email URL that sends the user to a specific email based on the emails code
-                                    // (the code is available from "thread.id")
-                                    // https://mail.google.com/mail/u/john.forsgren@appliedtechnology.se/#inbox/1866ef55b8dd710e
 
                                 } as EmailObject;
 
                                 emailList.push(email);
-                                // Add the new email to an list email object so it can be displayed. 
                                 
                             })
 

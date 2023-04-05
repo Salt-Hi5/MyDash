@@ -8,14 +8,14 @@ public class Location
     public int Id { get; set; }
     public List<User> Users { get; set; }
 
-    public string Name { get; set; } // The name of the location (e.g city)
+    public string Name { get; set; } 
     public string Region { get; set; }
     public string Country { get; set; }
     public string Timezone { get; set; }
     public string Url { get; set; }
 
 
-    public Location() {} // The database needs an empty constructor to work if the model includes a non-empty constructor. 
+    public Location() {} 
     
     public Location(string url, IConfiguration config, bool ipBasedLocation = false) 
     { 

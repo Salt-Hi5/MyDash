@@ -1,14 +1,9 @@
 import { User, UserLocation, WeatherResponse } from "../Types/Types";
 import { getIP } from "./GeoLocation";
 var apiUrl = "https://mydashdotnetapi.azurewebsites.net/api";
-const apiTestUrl = "https://localhost:7037/api";   // Used for testing, since the deployed apiUrl doesn't work when building the app.  
-apiUrl = apiTestUrl;
+const apiTestUrl = "https://localhost:7037/api";  
+//apiUrl = apiTestUrl;
 
-/* DOCUMENT PURPOSE: 
-    * Manage all web calls for the front end. 
-*/
-
-// ==== USER AND WEATHER DATA  ==== 
 
 export const getUser = async (credential: string): Promise<User> => {
 
@@ -41,7 +36,7 @@ export const getWeather = async (userHash: string): Promise<WeatherResponse> => 
 }
 
 export const patchLocations = async (userHash: string, locationUrls: string[]): Promise<number> => {
-    const requestBody = JSON.stringify(locationUrls); // Sends in the locationurls to the request. The locationUrls are the path to a specific location, e.g "london-GreatBritain-[...]"
+    const requestBody = JSON.stringify(locationUrls);
 
     const response = await fetch(`${apiUrl}/User/${userHash}/locations`, {
         method: "PATCH",

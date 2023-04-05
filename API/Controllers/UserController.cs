@@ -46,19 +46,19 @@ public class UserController : ControllerBase
     }
 
     [HttpPatch("{userHash}/nickname")]
-    public async Task<IActionResult> PutNickname(string userHash, [FromBody] string nickname) // Adds a nickname to the user. 
+    public async Task<IActionResult> PutNickname(string userHash, [FromBody] string nickname)
     {
         var userFound = _context.UserExists(userHash, out var user);
         if (!userFound) return NotFound();
 
-        user!.Nickname = nickname; // User defined in UserExists. The "!" prevents  "dereference null reference".
+        user!.Nickname = nickname; 
         await _context.SaveChangesAsync();
 
         return NoContent();
     }
 
     [HttpPatch("{userHash}/theme")]
-    public async Task<IActionResult> PutTheme(string userHash, [FromBody] string theme) // Adds a theme to the user. 
+    public async Task<IActionResult> PutTheme(string userHash, [FromBody] string theme) 
     {
         var userFound = _context.UserExists(userHash, out var user);
         if (!userFound) return NotFound();
@@ -70,7 +70,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPatch("{userHash}/locations")]
-    public async Task<IActionResult> PutLocations(string userHash, [FromBody] string[] locationUrls) // Adds a new location to the user. 
+    public async Task<IActionResult> PutLocations(string userHash, [FromBody] string[] locationUrls)
     {
         var userFound = _context.UserExists(userHash, out var user);
         if (!userFound) return NotFound();
@@ -83,9 +83,6 @@ public class UserController : ControllerBase
     }
 
 
-
-
-    // FOR TESTING PURPOSES -- REMOVE BEFORE GO LIVE OR IMPLEMENT STRICTER CORS
 
     [HttpGet("/testing/User/{userHash}")]
     public ActionResult<FrontendUserResponse> GetUserByHash(string userHash)
@@ -102,28 +99,6 @@ public class UserController : ControllerBase
             .Include(user => user.Locations)
             .Select(user => new FrontendUserResponse(user))
             .ToList();
-    }
-
-    [HttpPost("/testing/User")]
-    public async Task<ActionResult<User>> PostTestUser(NewUserRequestForTesting request)
-    {
-        var user = new User(request, _config);
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction("GetUser", new { userHash = user.UserIdHash }, new FrontendUserResponse(user));
-    }
-
-    [HttpDelete("/testing/User/{userHash}")]
-    public async Task<IActionResult> DeleteUser(string userHash)
-    {
-        var userFound = _context.UserExists(userHash, out var user);
-        if (!userFound) return NotFound();
-
-        _context.Users.Remove(user!);
-        await _context.SaveChangesAsync();
-
-        return Ok();
     }
 }
 

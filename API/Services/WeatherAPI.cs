@@ -1,10 +1,6 @@
 
 namespace API.Services;
 
-/*
-PURPOSE: Used to manage the HTTP fetches from the frontend to the backend API. 
-For an otherview of how the WeatherAPI works, see "WeatherController.cs" in the Backend. 
-*/
 
 public class WeatherAPI
 {
@@ -14,7 +10,7 @@ public class WeatherAPI
     private string _baseUrl, _locationSearchUrl, _currentWeatherUrl, _timeZoneUrl;
     private readonly string _apiKey;
 
-    public WeatherAPI(IConfiguration config) // Constructor 
+    public WeatherAPI(IConfiguration config) 
     {
         _config = config;
         _client = new HttpClient();
@@ -27,7 +23,7 @@ public class WeatherAPI
         _timeZoneUrl = $"{_baseUrl}/timezone.json?key={_apiKey}&q=";   
     }
 
-    public async Task<List<WeatherApiLocation>> SearchLocations(string searchString) // Gets the location from that the user searched for, e.g "London". 
+    public async Task<List<WeatherApiLocation>> SearchLocations(string searchString) 
     {
         var response = await _client.GetAsync(_locationSearchUrl + searchString);
         var locations = await JsonSerializer.DeserializeAsync<List<WeatherApiLocation>>(await response.Content.ReadAsStreamAsync());

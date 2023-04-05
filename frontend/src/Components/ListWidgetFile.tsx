@@ -8,15 +8,6 @@ import { FileItem } from "../Types/Types";
 
 export const ListWidgetFile = (props: {fileItem: FileItem}) => {
 
-    /*
-    const documentUrl = "https://docs.google.com/document/d/{fileId}/edit"
-    const spreadsheetUrl = "https://docs.google.com/spreadsheets/d/{fileId}/edit"
-    const presentationUrl = "https://docs.google.com/presentation/d/{fileId}/edit"
-    
-    the mimeType contains the type of file after the last period.
-    url + {type} + /d/ + {fileId} + /edit
-
-    */
     const url = "https://docs.google.com";
     const mimetypeArray = /[^.]*$/.exec(props.fileItem.mimeType);
     const mimetype = mimetypeArray ? mimetypeArray[0] : "other";
