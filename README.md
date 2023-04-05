@@ -8,7 +8,7 @@ The application's frontend is written in TypeScript using React. It has a primar
 
 <!-- Check out MyDash today at https://salmon-island-036fee403.2.azurestaticapps.net -->
 
-### Features
+## Features
 
 • Simple and convenient login with your existing Google account.
 
@@ -26,11 +26,11 @@ The application's frontend is written in TypeScript using React. It has a primar
 
 • Delete locations when you no longer need them.
 
-### Privacy
+## Privacy
 
 MyDash takes user privacy very seriously, and does not store any sensitive information retrieved from Google. We store only the user's first name, email address and the link to their Google profile picture, along with saved application settings such as which locations to show weather data about. In the future we intend to improve the 
 
-### Limitations & Future Improvements
+## Limitations & Future Improvements
 
 Due to the very limited time we had to complete this project (10 days), we were forced to limit the scope more than we would have preferred. Things that are not in the current version but we would like to build in the future include:
 
@@ -40,7 +40,7 @@ Due to the very limited time we had to complete this project (10 days), we were 
 
 • 
 
-### APIs
+## APIs
 
 The following APIs are currently being used by MyDash:
 
