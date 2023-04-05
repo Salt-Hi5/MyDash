@@ -10,14 +10,14 @@ The application's frontend is written in TypeScript using React. It has a primar
 
 ### Features
 
-• Simple and convenient login with your existing Google account.
-• Automatic account creation on first login provides a streamlined experience.
-• Make Google searches right from the dashboard, with results opening in a new tab.
-• Widgets for Google Drive, Google Calendar and Gmail, as well as weather and time.
-• Ability to join remote meetings in Google Meets right from the app, and to go to Gmail and Google Calendar for more information.
-• Current time and weather for the location where you first logged into MyDash is automatically displayed.
-• Add additional locations to see weather data and local time for any location in the world.
-• Delete locations when you no longer need them.
+* Simple and convenient login with your existing Google account.
+* Automatic account creation on first login provides a streamlined experience.
+* Make Google searches right from the dashboard, with results opening in a new tab.
+* Widgets for Google Drive, Google Calendar and Gmail, as well as weather and time.
+* Ability to join remote meetings in Google Meets right from the app, and to go to Gmail and Google Calendar for more information.
+* Current time and weather for the location where you first logged into MyDash is automatically displayed.
+* Add additional locations to see weather data and local time for any location in the world.
+* Delete locations when you no longer need them.
 
 ### Privacy
 
@@ -27,14 +27,14 @@ MyDash takes user privacy very seriously, and does not store any sensitive infor
 
 Due to the very limited time we had to complete this project (10 days), we were forced to limit the scope more than we would have preferred. Things that are not in the current version but we would like to build in the future include:
 
-• 
-• 
-• 
+* 
+* 
+* 
 
 ### APIs
 
 The following APIs are currently being used by MyDash:
 
-• 
-• 
-• 
+* 
+* 
+* 
