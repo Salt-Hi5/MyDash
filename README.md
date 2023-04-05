@@ -6,6 +6,14 @@ MyDash is a full-stack web application built by the mob [Hi5](https://github.com
 
 The application's frontend is written in TypeScript using React. It has a primary backend written in C# using ASP.NET, and a secondary one to handle the API calls with Google, written in JavaScript using Node.js and Express.js. It uses a SQL Server to store non-sentitive user settings, and is deployed using Azure.
 
+### Features
+
+...
+
 ### Privacy
 
 MyDash takes user privacy very seriously, and does not store any sensitive information retrieved from Google. We store only the user's first name, email address and the link to their Google profile picture, along with saved application settings such as which locations to show weather data about.
+
+### Limitations & Future Improvements
+
+Due to the very limited time we had to complete this project (10 days), we were forced to limit the scope more than we would have preferred.
