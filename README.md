@@ -11,7 +11,7 @@ The application's frontend is written in TypeScript using React. It has a primar
 
 ## Features
 
-• Simple and convenient login with your existing Google account.
+• Simple and convenient login using your existing Google account.
 
 • Automatic account creation on first login provides a streamlined experience.
 
