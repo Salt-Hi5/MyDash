@@ -34,7 +34,7 @@ export const EventViewWidget = () => {
             <div id="EventViewWidget--Header"
                 className="width-full rounded-t-3xl p-5
                             flex justify-between 
-                            bg-red-800">
+                            bg-red-700/75">
 
                 <button onClick={(e) => { cancel() }}
                     className="rounded-full w-10 h-10 pb-1

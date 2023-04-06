@@ -22,7 +22,7 @@ export const ListWidget = (props: { contentType: string }) => {
                 return <section id="EmailWidget"
                         className={`mt-20 opacity-90 rounded-3xl p-4 h-3/5
                                 flex gap-4 flex-col overflow-auto shrink
-                                bg-slate-500 text-black
+                                bg-slate-600/80 text-black
                                 shadow-md shadow-black`} >
                         <span className="text-xl text-white pl-2">Recent Emails</span>
                         {emailArray.map(email => <ListWidgetEmail key={email.emailURL} email={email as EmailObject} />)}
@@ -32,7 +32,7 @@ export const ListWidget = (props: { contentType: string }) => {
                 return <section id="CalendarWidget"
                         className={`opacity-90 rounded-3xl p-4 h-2/5
                                 flex gap-4 flex-col overflow-auto
-                                bg-red-800 text-black
+                                bg-red-700/75 text-black
                                 shadow-md shadow-black`} >
                         <span className="text-xl text-white pl-2">Upcoming Events</span>
                         {calendarArray.map(event => <ListWidgetEvent key={event.htmlLink} event={event as CalendarObject} />)}
@@ -42,7 +42,7 @@ export const ListWidget = (props: { contentType: string }) => {
                 return <section id="FileWidget"
                             className={`opacity-90 rounded-3xl p-6 pb-4
                                         flex flex-col justify-start
-                                        bg-emerald-600 text-black
+                                        bg-emerald-600/75 text-black
                                         
                                         shadow-md shadow-black`} >
                         <span className="text-xl text-white pl-2 pb-4 h-12">Recent Files</span>

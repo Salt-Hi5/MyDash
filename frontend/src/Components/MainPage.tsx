@@ -139,7 +139,7 @@ export const MainPage = () => {
             </section>
 
             <section id="CenterWidgetColumn" className="w-1/2 grow flex flex-col items-center">
-                <h1 className="rounded-full my-24 text-6xl font-extraligh text-white py-2 px-6 shadow-md shadow-black bg-pink-900/75">Welcome {nickname}</h1>
+                <h1 className="rounded-full my-24 text-6xl font-extraligh text-white py-2 px-6 shadow-md shadow-black bg-emerald-900/60">Welcome {nickname}</h1>
                 <SearchWidget />
                 <article className={`w-4/5 mt-20`}>
                     {
