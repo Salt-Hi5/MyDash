@@ -35,21 +35,18 @@ MyDash takes user privacy very seriously, and does not store any sensitive infor
 
 ## Limitations & Future Improvements
 
-Due to the very limited time we had to complete this project (10 days), we were forced to limit the scope more than we would have preferred. Things that are not in the current version but we would like to build in the future include:
+Due to the limited time we had to complete this project, we were forced to limit the scope more than we would have preferred. Things that are not in the current version but we would like to build in the future include:
 
-• 
+• ChatGPT API: With features such as replying to emails or summarizing/sorting Gdrive documents. 
 
-• 
-
-• 
-
+• Google News Feed
 
 ## APIs
-
 The following APIs are currently being used by MyDash:
-
-• 
-
-• 
-
-• 
+• Google APIs:
+    - Gmail: https://developers.google.com/gmail/api/reference/rest 
+    - Drive: https://developers.google.com/drive/api/reference/rest/v3 
+    - Calendar: https://developers.google.com/calendar/api/v3/reference
+    - Oauth2: https://developers.google.com/identity/protocols/oauth2 
+• WeatherAPI: https://www.weatherapi.com/
+• Luxon: https://moment.github.io/luxon/#/
